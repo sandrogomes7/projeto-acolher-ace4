@@ -1,0 +1,36 @@
+==========================================================
+  PASTA DE ÁUDIO — Acolhimento Digital
+==========================================================
+
+Coloque aqui os arquivos .mp3 da narração. O botão "Ouvir
+explicação" em cada tela toca o arquivo correspondente.
+
+Gere os áudios com uma IA de voz (ElevenLabs, Azure Neural
+TTS, Google Cloud TTS...) em português-BR, com voz acolhedora.
+
+------ NOMES EXATOS DOS ARQUIVOS ESPERADOS ------
+
+Carrossel de introdução:
+  intro_0.mp3   -> "Vamos te acompanhar"
+  intro_1.mp3   -> "O exame preventivo"
+  intro_2.mp3   -> "Seu resultado veio alterado"
+  intro_3.mp3   -> "Você vai a um serviço especial"
+  intro_4.mp3   -> "O que é colposcopia"
+  intro_5.mp3   -> "Você não está sozinha"
+
+Etapas da jornada:
+  etapa_coleta.mp3          -> Coleta do preventivo
+  etapa_resultado.mp3       -> Resultado do exame
+  etapa_encaminhamento.mp3  -> Encaminhamento
+  etapa_colposcopia.mp3     -> Colposcopia
+  etapa_acompanhamento.mp3  -> Conduta e acompanhamento
+
+------ IMPORTANTE ------
+
+- Os textos para narração estão em lib/data/content.dart
+  (campos "title"/"body"/"sections"). É só copiar e gerar.
+- Se um arquivo ainda não existir, o app NÃO quebra: ele
+  só mostra um aviso "áudio ainda não adicionado".
+- Para trocar/atualizar um áudio, basta substituir o .mp3
+  com o mesmo nome e rodar de novo.
+==========================================================

@@ -1,0 +1,34 @@
+name: acolher_app
+description: "Acolhimento Digital — guia em áudio para o cuidado do colo do útero."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  # Tocador de áudio para os arquivos .mp3 da pasta assets/audio
+  just_audio: ^0.9.40
+  # Fonte Inter (mesma do Figma) sem precisar baixar arquivos de fonte
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  # >>> AQUI ENTRA O ÁUDIO <<<
+  # Basta colocar os arquivos .mp3 dentro de assets/audio/
+  # (os nomes esperados estão em lib/data/content.dart e no README).
+  assets:
+    - assets/audio/
+    # >>> AQUI ENTRAM AS ILUSTRAÇÕES <<<
+    # Coloque as imagens em assets/illustrations/ (nomes no LEIA-ME).
+    # Enquanto não existirem, o app usa um placeholder e não quebra.
+    - assets/illustrations/
