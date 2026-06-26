@@ -29,34 +29,49 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.bgCream,
       appBar: asPicker
           ? AppBar(
+              backgroundColor: AppColors.bgCream,
+              surfaceTintColor: Colors.transparent,
+              elevation: 0,
+              shadowColor: Colors.transparent,
               leading: IconButton(
                 icon: const Icon(Icons.close_rounded),
+                color: AppColors.textBody,
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              title: const Text('Mudar minha situação',
-                  style: TextStyle(fontSize: 16)),
+              title: const Text(
+                'Mudar minha situação',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textBody,
+                ),
+              ),
+              centerTitle: false,
             )
           : null,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.fromLTRB(24, 22, 24, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 24),
               const Text(onboardingTitle,
                   style: TextStyle(
                     fontSize: 26,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textDark,
+                    fontWeight: FontWeight.w600,
+                    height: 1.1,
+                    color: AppColors.textBody,
                   )),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               const Text(onboardingSubtitle,
                   style: TextStyle(
-                      fontSize: 15, color: AppColors.textMuted, height: 1.5)),
-              const SizedBox(height: 24),
+                      fontSize: 15,
+                      color: AppColors.textTertiary,
+                      height: 1.48)),
+              const SizedBox(height: 32),
               Expanded(
                 child: ListView.separated(
                   itemCount: onboardingOptions.length,
@@ -86,40 +101,60 @@ class _OptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.white,
-      borderRadius: BorderRadius.circular(16),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.border, width: 1),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: const BoxDecoration(
-                  color: AppColors.surfaceSoft,
-                  shape: BoxShape.circle,
+    return SizedBox(
+      height: 82,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: onTap,
+          child: Ink(
+            decoration: BoxDecoration(
+              color: AppColors.surfaceWarm,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: AppColors.borderLight, width: 1),
+              boxShadow: const [
+                BoxShadow(
+                  color: AppColors.shadowLight,
+                  offset: Offset(0, 6),
+                  blurRadius: 15.75,
                 ),
-                child: Icon(icon, color: AppColors.primary, size: 22),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(14, 0, 12, 0),
+              child: Row(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: const BoxDecoration(
+                      color: AppColors.surfaceLavender,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(icon, color: AppColors.primaryPlum, size: 22),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      label,
+                      maxLines: 3,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        height: 1.2,
+                        color: AppColors.textBody,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  const Icon(Icons.chevron_right_rounded,
+                      color: AppColors.textMutedWarm, size: 22),
+                ],
               ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Text(label,
-                    style: const TextStyle(
-                        fontSize: 15,
-                        color: AppColors.textDark,
-                        fontWeight: FontWeight.w500)),
-              ),
-              const Icon(Icons.chevron_right_rounded,
-                  color: AppColors.textMuted),
-            ],
+            ),
           ),
         ),
       ),

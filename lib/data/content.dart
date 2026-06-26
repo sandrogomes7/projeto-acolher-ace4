@@ -43,7 +43,13 @@ const List<IntroPage> introPages = [
   IntroPage(
     title: 'O exame preventivo',
     body:
-        'É o exame que você fez no posto. Ele olha o colo do útero para ver se está tudo bem.',
+        '''É o exame que você fez no posto. Ele serve para olhar o colo do útero e ter certeza de que está tudo bem.
+
+Existem dois tipos principais desse exame:
+
+Papanicolau: É o mais comum. Ele procura por pequenas alterações nas células do útero.
+
+DNA de HPV: É um exame mais moderno. Ele procura diretamente pelo vírus que pode causar essas alterações.''',
     stepLabel: 'Passo 1 de 5',
     cta: 'Próximo',
     audio: 'intro_1.mp3',
@@ -94,8 +100,8 @@ const String onboardingSubtitle =
 
 /// As opções estão na MESMA ordem usada pelo motor `journeyForOnboarding`.
 const List<String> onboardingOptions = [
-  'Fiz o exame preventivo', // 0
-  'Recebi um resultado alterado', // 1
+  'Fiz o exame preventivo Papanicolau ou Teste DNA HPV', // 0
+  'Recebi um resultado alterado no exame de triagem preventivo', // 1
   'Fui encaminhada a outro serviço', // 2
   'Vou fazer a colposcopia', // 3
   'Já fiz a colposcopia', // 4
@@ -153,7 +159,7 @@ const Map<String, StepContent> stepContents = {
     reassurance: 'Esse foi o primeiro passo do seu cuidado.',
     sections: [
       StepSection('O que é o preventivo',
-          'O preventivo, ou Papanicolau, é um exame simples feito no posto. A enfermeira coleta uma pequena amostra do colo do útero, sem dor, para ver se está tudo bem.'),
+          'O preventivo, ou Papanicolau, é um exame simples feito no posto. A enfermeira coleta uma pequena amostra do colo do útero através de uma escovinha, sem dor, para ver se está tudo bem.'),
       StepSection('Por que ele é importante',
           'Ele encontra alterações cedo, antes de virarem um problema maior. Por isso deve ser repetido de tempos em tempos.'),
     ],
@@ -297,7 +303,8 @@ JourneyPlan journeyForOnboarding(int index) {
     case 1: // Recebi um resultado alterado
     case 2: // Fui encaminhada a outro serviço
       return JourneyPlan(
-        headline: 'Seu exame teve uma alteração. Vamos juntas no próximo passo.',
+        headline:
+            'Seu exame teve uma alteração. Vamos juntas no próximo passo.',
         steps: [
           _p('coleta', StepStatus.done, 'Concluído'),
           _p('resultado', StepStatus.done, 'Concluído'),
@@ -308,7 +315,8 @@ JourneyPlan journeyForOnboarding(int index) {
       );
     case 3: // Vou fazer a colposcopia
       return JourneyPlan(
-        headline: 'A colposcopia é o seu próximo passo. Saber o que esperar ajuda.',
+        headline:
+            'A colposcopia é o seu próximo passo. Saber o que esperar ajuda.',
         steps: [
           _p('coleta', StepStatus.done, 'Concluído'),
           _p('resultado', StepStatus.done, 'Concluído'),
@@ -348,7 +356,8 @@ class PathBranch {
   final String summary;
   final BranchTone tone;
   final List<String> stepIds; // nós a abrir, em ordem
-  const PathBranch(this.label, this.code, this.summary, this.tone, this.stepIds);
+  const PathBranch(
+      this.label, this.code, this.summary, this.tone, this.stepIds);
 }
 
 enum BranchTone { calm, attention, refer }
@@ -386,7 +395,8 @@ class HpvPath {
 }
 
 const List<HpvPath> hpvPaths = [
-  HpvPath('HPV negativo', 'Rotina — repetir em cerca de 5 anos.', BranchTone.calm),
+  HpvPath(
+      'HPV negativo', 'Rotina — repetir em cerca de 5 anos.', BranchTone.calm),
   HpvPath('HPV positivo + citologia normal', 'Repetir o teste em 12 meses.',
       BranchTone.attention),
   HpvPath('HPV positivo + citologia alterada', 'Colposcopia imediata.',
