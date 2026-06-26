@@ -42,8 +42,8 @@ class _StepDetailScreenState extends State<StepDetailScreen> {
     final showProgress = widget.stepNumber != null && widget.totalSteps != null;
     final sections = _hasTabs ? _activeTab.sections : widget.content.sections;
     final tip = _hasTabs ? _activeTab.tip : widget.content.tip;
-    final tipBackground = _hasTabs ? AppColors.alertBg : AppColors.surfaceSoft;
-    final tipTextColor = _hasTabs ? AppColors.alert : AppColors.brandDark;
+    const tipBackground = AppColors.alertBg;
+    const tipTextColor = AppColors.alert;
 
     return Scaffold(
       backgroundColor: AppColors.bgRose,
@@ -192,7 +192,7 @@ class _StepDetailScreenState extends State<StepDetailScreen> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(tip,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 14,
                             height: 1.35,
                             color: tipTextColor,

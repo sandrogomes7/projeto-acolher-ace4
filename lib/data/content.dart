@@ -182,11 +182,11 @@ const Map<String, StepContent> stepContents = {
         tip:
             'Depois da coleta, aguarde o resultado e siga a orientação da equipe. O exame costuma ser realizado todo ano nos dois primeiros anos e, se estiver tudo certo, repetido a cada 3 anos.',
         sections: [
-          StepSection(
-            'O que é o Papanicolau',
-            'Também chamado de preventivo, é um exame simples feito no posto. A enfermeira coleta uma pequena amostra do colo do útero para observar se está tudo bem.',
-            audioFile: 'coleta_papanicolau_o_que_e.mp3',
-          ),
+          StepSection('O que é o Papanicolau',
+              'O preventivo, ou Papanicolau, é um exame simples feito no posto. A enfermeira coleta uma pequena amostra do colo do útero através de uma escovinha, sem dor, para ver se está tudo bem.',
+              audioFile: 'coleta_papanicolau_o_que_e.mp3'
+              // audioFile: 'coleta_papanicolau_o_que_e.mp3',
+              ),
           StepSection(
             'Como funciona',
             'Você se deita como no preventivo. A profissional usa um pequeno instrumento para visualizar o colo do útero e coleta a amostra com uma escovinha ou espátula. Pode causar um leve incômodo, mas costuma ser rápido.',
@@ -237,7 +237,7 @@ const Map<String, StepContent> stepContents = {
           'Não achou alteração. Você volta para a rotina do posto.'),
       StepSection('Alteração leve (ASC-US, LSIL)',
           'Pequena alteração. Muitas somem sozinhas — você só repete o exame depois.'),
-      StepSection('Alteração importante (ASC-H, HSIL)',
+      StepSection('Alteração importante (ASC-H, HSIL, AGC e AIS)',
           'Aí sim você vai para um exame mais detalhado: a colposcopia.'),
     ],
     tip: 'O resultado pode seguir três caminhos. Veja o seu com a equipe.',

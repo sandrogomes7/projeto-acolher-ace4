@@ -28,9 +28,6 @@ class AudioButton extends StatefulWidget {
 class _AudioButtonState extends State<AudioButton> {
   final _audio = AudioService.instance;
 
-  bool get _isThisPlaying =>
-      _audio.currentFile == widget.audioFile && _audio.isPlaying;
-
   Future<void> _onTap() async {
     final ok = await _audio.toggle(widget.audioFile);
     if (!ok && mounted) {
@@ -51,7 +48,10 @@ class _AudioButtonState extends State<AudioButton> {
     return StreamBuilder<PlayerState>(
       stream: _audio.playerStateStream,
       builder: (context, snapshot) {
-        final playing = _isThisPlaying;
+        final playerState = snapshot.data;
+        final playing = _audio.currentFile == widget.audioFile &&
+            (playerState?.playing ?? _audio.isPlaying) &&
+            playerState?.processingState != ProcessingState.completed;
         final borderRadius = BorderRadius.circular(compact ? 9999 : 16);
         final background =
             compact ? AppColors.surfaceLilac : AppColors.surfacePink;
