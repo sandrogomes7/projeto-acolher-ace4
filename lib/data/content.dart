@@ -278,11 +278,9 @@ class PlannedStep {
 class JourneyPlan {
   final String headline;
   final List<PlannedStep> steps;
-  final bool exploreAll;
   const JourneyPlan({
     required this.headline,
     required this.steps,
-    this.exploreAll = false,
   });
 }
 
@@ -338,70 +336,18 @@ JourneyPlan journeyForOnboarding(int index) {
       );
     case 5: // Não sei — quero ver tudo
     default:
-      return const JourneyPlan(
-        headline: 'Veja todos os caminhos possíveis, com calma.',
-        steps: [],
-        exploreAll: true,
+      return JourneyPlan(
+        headline: 'Veja a jornada completa, com calma.',
+        steps: [
+          _p('coleta', StepStatus.current, 'Comece por aqui'),
+          _p('resultado', StepStatus.next, 'Próxima etapa'),
+          _p('encaminhamento', StepStatus.later, 'Depois'),
+          _p('colposcopia', StepStatus.later, 'Depois'),
+          _p('acompanhamento', StepStatus.later, 'Depois'),
+        ],
       );
   }
 }
-
-/// ===================================================================
-/// FLUXOGRAMA COMPLETO — usado na tela "Todos os caminhos"
-/// (espelha o diagrama do projeto)
-/// ===================================================================
-class PathBranch {
-  final String label; // "Resultado normal"
-  final String code; // "NILM"
-  final String summary;
-  final BranchTone tone;
-  final List<String> stepIds; // nós a abrir, em ordem
-  const PathBranch(
-      this.label, this.code, this.summary, this.tone, this.stepIds);
-}
-
-enum BranchTone { calm, attention, refer }
-
-const List<PathBranch> allPaths = [
-  PathBranch(
-    'Resultado normal',
-    'NILM',
-    'Sem alteração. Você volta para a rotina do posto (a cada 3 anos).',
-    BranchTone.calm,
-    ['coleta', 'resultado', 'rotina'],
-  ),
-  PathBranch(
-    'Alteração leve',
-    'ASC-US · LSIL',
-    'Alteração pequena. Muitas regridem sozinhas — você só repete o exame.',
-    BranchTone.attention,
-    ['coleta', 'resultado', 'repetir'],
-  ),
-  PathBranch(
-    'Alteração importante',
-    'ASC-H · HSIL · AGC · AIS',
-    'Vai para colposcopia, biópsia e conduta conforme o resultado.',
-    BranchTone.refer,
-    ['coleta', 'resultado', 'encaminhamento', 'colposcopia', 'acompanhamento'],
-  ),
-];
-
-/// Caminhos do Teste de DNA-HPV (texto resumido do fluxograma).
-class HpvPath {
-  final String label;
-  final String conduct;
-  final BranchTone tone;
-  const HpvPath(this.label, this.conduct, this.tone);
-}
-
-const List<HpvPath> hpvPaths = [
-  HpvPath(
-      'HPV negativo', 'Rotina — repetir em cerca de 5 anos.', BranchTone.calm),
-  HpvPath('HPV positivo + citologia normal', 'Repetir o teste em 12 meses.',
-      BranchTone.attention),
-  HpvPath('HPV positivo + citologia alterada', 'Colposcopia imediata.',
-      BranchTone.refer),
-];
 
 /// ---------- Tira-dúvidas ----------
 class FaqItem {

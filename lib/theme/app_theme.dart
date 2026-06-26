@@ -18,14 +18,24 @@ class AppColors {
   static const pinkText = Color(0xFF9B2F5E);
 
   static const bgCream = Color(0xFFFFF8F1);
+  static const bgRose = Color(0xFFFFF7F4);
+  static const bgSurface = Color(0xFFFFFDFC);
   static const surfaceWarm = Color(0xFFFFFDFA);
   static const surfaceLavender = Color(0xFFF1E7F1);
+  static const borderWarm = Color(0xFFEAD8D2);
   static const borderLight = Color(0xFFEADFD6);
+  static const textDarkWarm = Color(0xFF2A1724);
+  static const textDarkWarm40 = Color(0x662A1724);
   static const textBody = Color(0xFF3F3038);
+  static const textBody85 = Color(0xD93F3038);
+  static const textSecondary = Color(0xFF6B5A61);
   static const textTertiary = Color(0xFF71635F);
   static const textMutedWarm = Color(0xFFA8959B);
+  static const textOnPrimary = Color(0xFFFFFDFC);
   static const primaryPlum = Color(0xFF7C4A67);
+  static const primaryDarker = Color(0xFF5C3B52);
   static const shadowLight = Color(0x176B4452);
+  static const shadow = Color(0x245B3D4D);
 }
 
 class AppTheme {
