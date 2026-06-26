@@ -114,7 +114,22 @@ const List<String> onboardingOptions = [
 class StepSection {
   final String label;
   final String text;
-  const StepSection(this.label, this.text);
+  final String? audioFile;
+  const StepSection(this.label, this.text, {this.audioFile});
+}
+
+class CollectionTabContent {
+  final String id;
+  final String label;
+  final List<StepSection> sections;
+  final String tip;
+
+  const CollectionTabContent({
+    required this.id,
+    required this.label,
+    required this.sections,
+    required this.tip,
+  });
 }
 
 /// Conteúdo de uma etapa — independente da posição na jornada.
@@ -124,6 +139,7 @@ class StepContent {
   final String summary; // frase curta mostrada no card "Você está aqui"
   final String reassurance;
   final List<StepSection> sections;
+  final List<CollectionTabContent>? tabs;
   final String tip;
   final String audio; // assets/audio/<audio>
   final String illustration; // assets/illustrations/<illustration>
@@ -134,6 +150,7 @@ class StepContent {
     required this.summary,
     required this.reassurance,
     required this.sections,
+    this.tabs,
     required this.tip,
     required this.audio,
     required this.illustration,
@@ -156,14 +173,57 @@ const Map<String, StepContent> stepContents = {
     id: 'coleta',
     title: 'Coleta do preventivo',
     summary: 'O primeiro passo do seu cuidado, feito no posto.',
-    reassurance: 'Esse foi o primeiro passo do seu cuidado.',
-    sections: [
-      StepSection('O que é o preventivo',
-          'O preventivo, ou Papanicolau, é um exame simples feito no posto. A enfermeira coleta uma pequena amostra do colo do útero através de uma escovinha, sem dor, para ver se está tudo bem.'),
-      StepSection('Por que ele é importante',
-          'Ele encontra alterações cedo, antes de virarem um problema maior. Por isso deve ser repetido de tempos em tempos.'),
+    reassurance: 'A coleta é rápida. Se sentir medo, avise a profissional.',
+    sections: [],
+    tabs: [
+      CollectionTabContent(
+        id: 'papanicolau',
+        label: 'Papanicolau',
+        tip:
+            'Depois da coleta, aguarde o resultado e siga a orientação da equipe. O exame costuma ser realizado todo ano nos dois primeiros anos e, se estiver tudo certo, repetido a cada 3 anos.',
+        sections: [
+          StepSection(
+            'O que é o Papanicolau',
+            'Também chamado de preventivo, é um exame simples feito no posto. A enfermeira coleta uma pequena amostra do colo do útero para observar se está tudo bem.',
+            audioFile: 'coleta_papanicolau_o_que_e.mp3',
+          ),
+          StepSection(
+            'Como funciona',
+            'Você se deita como no preventivo. A profissional usa um pequeno instrumento para visualizar o colo do útero e coleta a amostra com uma escovinha ou espátula. Pode causar um leve incômodo, mas costuma ser rápido.',
+            audioFile: 'coleta_papanicolau_como_funciona.mp3',
+          ),
+          StepSection(
+            'Requisitos para o exame',
+            '• Evite relações sexuais, inclusive com camisinha, de 24 a 48 horas antes.\n• Não use duchas vaginais, cremes, óvulos ou lubrificantes nos 2 dias anteriores.\n• Não esteja menstruada. O ideal é fazer de 5 a 7 dias depois que o sangramento terminar.',
+            audioFile: 'coleta_papanicolau_requisitos.mp3',
+          ),
+        ],
+      ),
+      CollectionTabContent(
+        id: 'dna-hpv',
+        label: 'Teste DNA HPV',
+        tip:
+            'Depois da coleta, aguarde o resultado e siga a orientação da equipe. O exame costuma ser realizado todo ano nos dois primeiros anos e, se estiver tudo certo, repetido a cada 3 anos.',
+        sections: [
+          StepSection(
+            'O que é o Teste DNA HPV',
+            'É um exame feito com a coleta no colo do útero. Ele procura sinais do HPV, vírus que pode causar alterações antes de virar doença.',
+            audioFile: 'coleta_dna_hpv_o_que_e.mp3',
+          ),
+          StepSection(
+            'Por que ele é importante',
+            'Quando encontra o vírus cedo, a equipe consegue acompanhar melhor e evitar problemas no futuro. A coleta é parecida com a do preventivo.',
+            audioFile: 'coleta_dna_hpv_importancia.mp3',
+          ),
+          StepSection(
+            'Requisitos para o exame',
+            '• Evite relações sexuais, inclusive com camisinha, de 24 a 48 horas antes.\n• Não use duchas vaginais, cremes, óvulos ou lubrificantes nos 2 dias anteriores.\n• Não esteja menstruada. O ideal é fazer de 5 a 7 dias depois que o sangramento terminar.\n• Avise a profissional se estiver grávida ou se houver suspeita de gravidez.',
+            audioFile: 'coleta_dna_hpv_requisitos.mp3',
+          ),
+        ],
+      ),
     ],
-    tip: 'Repita o preventivo quando a equipe orientar.',
+    tip: 'Depois da coleta, aguarde o resultado e siga a orientação da equipe.',
     audio: 'etapa_coleta.mp3',
     illustration: 'etapa_coleta.png',
   ),
@@ -296,6 +356,9 @@ JourneyPlan journeyForOnboarding(int index) {
         steps: [
           _p('coleta', StepStatus.done, 'Concluído'),
           _p('resultado', StepStatus.current, 'Você está aqui'),
+          _p('encaminhamento', StepStatus.next, 'Próxima etapa'),
+          _p('colposcopia', StepStatus.later, 'Depois'),
+          _p('acompanhamento', StepStatus.later, 'Depois'),
         ],
       );
     case 1: // Recebi um resultado alterado

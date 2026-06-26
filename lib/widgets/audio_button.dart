@@ -14,10 +14,12 @@ class AudioButton extends StatefulWidget {
     super.key,
     required this.audioFile,
     this.label = 'Ouvir explicação',
+    this.compact = false,
   });
 
   final String audioFile;
   final String label;
+  final bool compact;
 
   @override
   State<AudioButton> createState() => _AudioButtonState();
@@ -34,7 +36,8 @@ class _AudioButtonState extends State<AudioButton> {
     if (!ok && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Áudio "${widget.audioFile}" ainda não foi adicionado.'),
+          content:
+              Text('Áudio "${widget.audioFile}" ainda não foi adicionado.'),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -44,40 +47,68 @@ class _AudioButtonState extends State<AudioButton> {
 
   @override
   Widget build(BuildContext context) {
+    final compact = widget.compact;
     return StreamBuilder<PlayerState>(
       stream: _audio.playerStateStream,
       builder: (context, snapshot) {
         final playing = _isThisPlaying;
+        final borderRadius = BorderRadius.circular(compact ? 9999 : 16);
+        final background =
+            compact ? AppColors.surfaceLilac : AppColors.surfacePink;
+        final border = compact ? AppColors.primaryPlum : Colors.transparent;
+        final iconColor =
+            compact ? AppColors.primaryPlum : AppColors.primaryDark;
+        final textColor =
+            compact ? AppColors.primaryPlum : AppColors.primaryDarkest;
+        final shadow = compact
+            ? const BoxShadow(
+                color: Color(0x12000000),
+                blurRadius: 3,
+                offset: Offset(0, 1),
+              )
+            : const BoxShadow(
+                color: AppColors.shadowLight,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              );
         return Semantics(
           button: true,
           label: playing ? 'Pausar explicação em áudio' : widget.label,
-          child: Material(
-            color: AppColors.surfaceSoft,
-            borderRadius: BorderRadius.circular(16),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(16),
-              onTap: _onTap,
-              child: Container(
-                height: 52,
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      playing ? Icons.pause_rounded : Icons.volume_up_rounded,
-                      color: AppColors.brandDark,
-                      size: 22,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      playing ? 'Pausar' : widget.label,
-                      style: const TextStyle(
-                        color: AppColors.brandDark,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+          child: Container(
+            decoration: BoxDecoration(
+              color: background,
+              borderRadius: borderRadius,
+              border: Border.all(color: border, width: compact ? 1 : 0),
+              boxShadow: [shadow],
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: borderRadius,
+                onTap: _onTap,
+                child: Container(
+                  height: compact ? 36 : 52,
+                  padding: EdgeInsets.symmetric(horizontal: compact ? 14 : 0),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        playing ? Icons.pause_rounded : Icons.volume_up_rounded,
+                        color: iconColor,
+                        size: compact ? 16 : 22,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 8),
+                      Text(
+                        playing ? 'Pausar' : widget.label,
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: compact ? 12 : 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

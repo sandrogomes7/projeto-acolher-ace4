@@ -18,10 +18,10 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.primary,
+      color: AppColors.primaryPlum,
       borderRadius: BorderRadius.circular(16),
       elevation: 4,
-      shadowColor: AppColors.primary.withOpacity(0.32),
+      shadowColor: AppColors.primaryShadow,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: onPressed,
@@ -34,14 +34,14 @@ class PrimaryButton extends StatelessWidget {
               Text(
                 label,
                 style: const TextStyle(
-                  color: AppColors.white,
+                  color: AppColors.textOnPrimary,
                   fontSize: 17,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               if (icon != null) ...[
                 const SizedBox(width: 10),
-                Icon(icon, color: AppColors.white, size: 22),
+                Icon(icon, color: AppColors.textOnPrimary, size: 22),
               ],
             ],
           ),

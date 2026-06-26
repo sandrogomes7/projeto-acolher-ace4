@@ -24,6 +24,13 @@ class AppColors {
   static const surfaceLavender = Color(0xFFF1E7F1);
   static const borderWarm = Color(0xFFEAD8D2);
   static const borderLight = Color(0xFFEADFD6);
+  static const surfacePink = Color(0xFFF4E8EF);
+  static const surfaceLilac = Color(0xFFF5EEF4);
+  static const alertBg = Color(0xFFF8DDE7);
+  static const alert = Color(0xFF7C3E61);
+  static const primaryDark = Color(0xFF6F4A62);
+  static const primaryDarkest = Color(0xFF59394F);
+  static const primaryShadow = Color(0x427C4A67);
   static const textDarkWarm = Color(0xFF2A1724);
   static const textDarkWarm40 = Color(0x662A1724);
   static const textBody = Color(0xFF3F3038);
