@@ -28,31 +28,22 @@ class StepDetailScreen extends StatefulWidget {
 }
 
 class _StepDetailScreenState extends State<StepDetailScreen> {
-  int _selectedCollectionTab = 0;
+  int _selectedTab = 0;
 
-  bool get _isCollectionStep =>
-      widget.content.id == 'coleta' &&
-      (widget.content.tabs?.isNotEmpty ?? false);
+  bool get _hasTabs => widget.content.tabs?.isNotEmpty ?? false;
 
   List<CollectionTabContent> get _tabs => widget.content.tabs ?? const [];
 
-  CollectionTabContent get _activeCollectionTab =>
-      _tabs[_selectedCollectionTab.clamp(0, _tabs.length - 1).toInt()];
+  CollectionTabContent get _activeTab =>
+      _tabs[_selectedTab.clamp(0, _tabs.length - 1).toInt()];
 
   @override
   Widget build(BuildContext context) {
     final showProgress = widget.stepNumber != null && widget.totalSteps != null;
-    final sections = _isCollectionStep
-        ? _activeCollectionTab.sections
-        : widget.content.sections;
-    final tip =
-        _isCollectionStep ? _activeCollectionTab.tip : widget.content.tip;
-    final tipBackground =
-        _isCollectionStep ? AppColors.alertBg : AppColors.surfaceSoft;
-    final tipIconColor =
-        _isCollectionStep ? AppColors.alert : AppColors.brandDark;
-    final tipTextColor =
-        _isCollectionStep ? AppColors.alert : AppColors.brandDark;
+    final sections = _hasTabs ? _activeTab.sections : widget.content.sections;
+    final tip = _hasTabs ? _activeTab.tip : widget.content.tip;
+    final tipBackground = _hasTabs ? AppColors.alertBg : AppColors.surfaceSoft;
+    final tipTextColor = _hasTabs ? AppColors.alert : AppColors.brandDark;
 
     return Scaffold(
       backgroundColor: AppColors.bgRose,
@@ -146,12 +137,12 @@ class _StepDetailScreenState extends State<StepDetailScreen> {
               ),
             ),
             const SizedBox(height: 22),
-            if (_isCollectionStep) ...[
+            if (_hasTabs) ...[
               _CollectionTabs(
                 tabs: _tabs,
-                selectedIndex: _selectedCollectionTab,
+                selectedIndex: _selectedTab,
                 onChanged: (index) {
-                  setState(() => _selectedCollectionTab = index);
+                  setState(() => _selectedTab = index);
                 },
               ),
               const SizedBox(height: 18),
@@ -160,10 +151,12 @@ class _StepDetailScreenState extends State<StepDetailScreen> {
                 switchInCurve: Curves.easeOut,
                 switchOutCurve: Curves.easeIn,
                 child: Column(
-                  key: ValueKey(_activeCollectionTab.id),
+                  key: ValueKey(_activeTab.id),
                   children: [
                     for (int i = 0; i < sections.length; i++) ...[
-                      _Section(section: sections[i], showAudioButton: true),
+                      _Section(
+                          section: sections[i],
+                          showAudioButton: sections[i].audioFile != null),
                       if (i < sections.length - 1) ...[
                         const SizedBox(height: 18),
                         Container(height: 1, color: AppColors.borderWarm),

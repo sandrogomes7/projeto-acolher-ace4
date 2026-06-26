@@ -265,13 +265,51 @@ const Map<String, StepContent> stepContents = {
     title: 'Colposcopia',
     summary: 'É o seu próximo exame. Saber o que esperar ajuda.',
     reassurance: 'É normal sentir ansiedade. Saber o que esperar ajuda.',
-    sections: [
-      StepSection('O que é a colposcopia',
-          'É um exame em que o médico usa um aparelho com luz e lente para ver o colo do útero bem de perto. Não corta e não entra no corpo.'),
-      StepSection('Como é o exame',
-          'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho para examinar (biópsia).'),
+    sections: [],
+    tabs: [
+      CollectionTabContent(
+        id: 'colposcopia',
+        label: 'Colposcopia',
+        tip:
+            'Não esqueça de levar o encaminhamento para o centro especializado, assim como o resultado da citologia ou do Teste DNA HPV feito anteriormente.',
+        sections: [
+          StepSection(
+            'O que é a colposcopia',
+            'É um exame em que o médico usa um aparelho com luz e lente para ver o colo do útero bem de perto. Não corta e não entra no corpo.',
+            audioFile: 'colposcopia_o_que_e.mp3',
+          ),
+          StepSection(
+            'Como funciona',
+            'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho semelhante a um grão de areia para examinar.',
+            audioFile: 'colposcopia_como_funciona.mp3',
+          ),
+          StepSection(
+            'Requisitos para o exame',
+            '• Evite relações sexuais, inclusive com camisinha, de 24 a 48 horas antes.\n• Não use duchas vaginais, cremes, óvulos ou lubrificantes vaginais nos 2 dias anteriores.\n• Não esteja menstruada. O ideal é realizar o exame de 5 a 7 dias após o término do sangramento.\n• Informe ao médico caso esteja grávida ou com suspeita de gravidez.',
+            audioFile: 'colposcopia_requisitos.mp3',
+          ),
+        ],
+      ),
+      CollectionTabContent(
+        id: 'biopsia',
+        label: 'Biópsia',
+        tip:
+            'Depois da biópsia, aguarde o resultado e siga a orientação da equipe.',
+        sections: [
+          StepSection(
+            'O que é a biópsia',
+            'Se o médico encontrar qualquer área suspeita durante a colposcopia, ele retira um pedacinho de tecido, semelhante ao tamanho de um grão de areia, para confirmar o diagnóstico em laboratório.',
+            audioFile: 'biopsia_o_que_e.mp3',
+          ),
+          StepSection(
+            'Como funciona',
+            'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho para examinar.',
+            audioFile: 'biopsia_como_funciona.mp3',
+          ),
+        ],
+      ),
     ],
-    tip: 'Se puder, evite marcar durante a menstruação.',
+    tip: 'Não esqueça de levar o encaminhamento para o centro especializado.',
     audio: 'etapa_colposcopia.mp3',
     illustration: 'etapa_colposcopia.png',
   ),
