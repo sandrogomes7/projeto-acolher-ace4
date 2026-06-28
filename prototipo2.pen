@@ -3066,7 +3066,7 @@
                       "fill": "$primary-darker",
                       "textGrowth": "fixed-width-height",
                       "width": 160,
-                      "height": 24.113659531090722,
+                      "height": 27.677966101694913,
                       "content": "Encaminhamento",
                       "fontFamily": "Inter",
                       "fontSize": 19,
@@ -3079,7 +3079,7 @@
                       "fill": "$primary-darker",
                       "textGrowth": "fixed-width-height",
                       "width": 262,
-                      "height": "fit_content(37.74311926605505)",
+                      "height": "fit_content(43.32203389830509)",
                       "content": "Seu preventivo teve uma alteração. Por isso você foi a um serviço especializado.",
                       "lineHeight": 1.399999976158142,
                       "fontFamily": "Inter",
@@ -3193,7 +3193,7 @@
                   "flipX": false,
                   "flipY": false,
                   "x": 46.488575598532734,
-                  "y": 12
+                  "y": 14.205459661479225
                 },
                 "zOlVO": {
                   "content": "Colposcopia",
@@ -3221,15 +3221,15 @@
               "type": "ref",
               "ref": "sX8it",
               "x": 0,
-              "y": 63.386412889251105,
+              "y": 70.79733221220955,
               "descendants": {
                 "xYLUg": {
                   "width": 255,
                   "height": 39,
                   "flipX": false,
                   "flipY": false,
-                  "x": 46.47910397907248,
-                  "y": 12
+                  "x": 46.47910397907245,
+                  "y": 14.205460604370522
                 },
                 "zOlVO": {
                   "content": "Biópsia",
@@ -3256,15 +3256,15 @@
               "type": "ref",
               "ref": "sX8it",
               "x": 0,
-              "y": 126.77285416041832,
+              "y": 141.5946946921178,
               "descendants": {
                 "xYLUg": {
                   "width": 255,
                   "height": 39,
                   "flipX": false,
                   "flipY": false,
-                  "x": 46.47910397907245,
-                  "y": 12
+                  "x": 46.47910397907246,
+                  "y": 14.205460604370522
                 },
                 "zOlVO": {
                   "content": "Acompanhamento",
@@ -5690,7 +5690,7 @@
       "id": "wNuLJ",
       "x": 2461,
       "y": -1114,
-      "name": "Etapa 5 · Acompanhamento",
+      "name": "Etapa 6 · Acompanhamento",
       "clip": true,
       "width": 390,
       "height": 969,
@@ -6259,7 +6259,7 @@
       "id": "c7mEb",
       "x": -1058,
       "y": 1695,
-      "name": "Tela · Tira-dúvidas",
+      "name": "Tira-dúvidas",
       "clip": true,
       "width": 390,
       "height": 1146,
@@ -6885,7 +6885,7 @@
       "id": "h1Eaq4",
       "x": -514,
       "y": 1695,
-      "name": "Tela · Apoio",
+      "name": "Apoio",
       "clip": true,
       "width": 390,
       "height": 873,
@@ -7275,7 +7275,7 @@
       "id": "U3NQd",
       "x": 209,
       "y": 1695,
-      "name": "Tela · Apoio",
+      "name": "asdasdadasd",
       "clip": true,
       "width": 390,
       "height": 844,
@@ -10445,7 +10445,7 @@
                       "textGrowth": "fixed-width-height",
                       "width": 174,
                       "height": 10,
-                      "content": "O QUE É O COLPOSCOPIA",
+                      "content": "O QUE É A COLPOSCOPIA",
                       "lineHeight": 1,
                       "fontFamily": "Inter",
                       "fontSize": 12,
@@ -10911,7 +10911,10 @@
           "height": "fill_container(91)",
           "descendants": {
             "h0vdf": {
-              "content": "Não esqueça de levar o encaminhamento para o centro especializado, assim como o resultado da citologia ou teste de DNA HPV feito anteriormente"
+              "content": "Não esqueça de levar o encaminhamento para o centro especializado, assim como o resultado da citologia ou teste de DNA HPV feito anteriormente",
+              "width": 312,
+              "height": "fit_content(40)",
+              "textGrowth": "fixed-width"
             }
           }
         }
@@ -11647,7 +11650,7 @@
       "id": "r66z0",
       "x": 1894,
       "y": -1114,
-      "name": "Etapa 4 - Colposcopia",
+      "name": "Etapa 5 - Biópsia",
       "clip": true,
       "width": 390,
       "height": 868,
@@ -13125,7 +13128,7 @@
               "name": "Conduta e acompanhamento",
               "fill": "$text-muted",
               "textGrowth": "fixed-width",
-              "width": 257.5330530113359,
+              "width": 256.8251272276721,
               "content": "Primeiros cuidados (Papanicolau ou DNA HPV)",
               "fontFamily": "Inter",
               "fontSize": 16,
@@ -13216,7 +13219,7 @@
               "name": "Conduta e acompanhamento",
               "fill": "$text-dark",
               "textGrowth": "fixed-width",
-              "width": 257.70150452691485,
+              "width": 257.8358258177051,
               "content": "Primeiros cuidados (Papanicolau ou DNA HPV)",
               "fontFamily": "Inter",
               "fontSize": 16,
@@ -13246,100 +13249,6 @@
           "icon": "chevron-right",
           "library": "lucide",
           "fill": "$text-muted"
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "ZTVAP",
-      "x": -1759,
-      "y": -2411,
-      "name": "Frame 4",
-      "clip": true,
-      "width": 449,
-      "height": 106,
-      "fill": "#FFFFFF",
-      "layout": "none",
-      "children": [
-        {
-          "type": "group",
-          "id": "IR9xw",
-          "x": 35,
-          "y": 26,
-          "layout": "horizontal",
-          "children": [
-            {
-              "type": "group",
-              "id": "FSGKv",
-              "name": "Check",
-              "children": [
-                {
-                  "type": "ellipse",
-                  "id": "HaxMR",
-                  "x": 19.161988211117325,
-                  "y": 0,
-                  "name": "Ellipse",
-                  "sweepAngle": -360.00001001791264,
-                  "fill": "$primary",
-                  "width": 60.03196306699666,
-                  "height": 28.000000000000007
-                },
-                {
-                  "type": "icon",
-                  "id": "h5gW1",
-                  "x": 27.455877845373422,
-                  "y": 4,
-                  "name": "Icone Nota · Coracao",
-                  "width": 43.444183798484424,
-                  "height": 20,
-                  "icon": "check",
-                  "library": "lucide",
-                  "fill": "$text-on-primary"
-                }
-              ]
-            },
-            {
-              "type": "group",
-              "id": "KUW06",
-              "layout": "vertical",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Gq6pm",
-                  "name": "Coleta do preventivo",
-                  "fill": "$text-dark",
-                  "textGrowth": "fixed-width",
-                  "width": 510.98635229645936,
-                  "content": "Primeiros cuidados (Papanicolau ou DNA HPV)",
-                  "fontFamily": "Inter",
-                  "fontSize": 16,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "rSFXF",
-                  "name": "Concluído",
-                  "fill": "$primary",
-                  "textGrowth": "fixed-width",
-                  "width": 537.8803708383784,
-                  "content": "Concluído",
-                  "fontFamily": "Inter",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "icon",
-              "id": "SfgEB",
-              "name": "Icone Nota · Coracao",
-              "width": 47.16797098121165,
-              "height": 22,
-              "icon": "chevron-right",
-              "library": "lucide",
-              "fill": "$text-muted"
-            }
-          ]
         }
       ]
     },

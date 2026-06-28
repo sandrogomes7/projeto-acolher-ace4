@@ -275,51 +275,62 @@ const Map<String, StepContent> stepContents = {
     title: 'Colposcopia',
     summary: 'É o seu próximo exame. Saber o que esperar ajuda.',
     reassurance: 'É normal sentir ansiedade. Saber o que esperar ajuda.',
-    sections: [],
-    tabs: [
-      CollectionTabContent(
-        id: 'colposcopia',
-        label: 'Colposcopia',
-        tip:
-            'Não esqueça de levar o encaminhamento para o centro especializado, assim como o resultado da citologia ou do Teste DNA HPV feito anteriormente.',
-        sections: [
-          StepSection(
-            'O que é a colposcopia',
-            'É um exame em que o médico usa um aparelho com luz e lente para ver o colo do útero bem de perto. Não corta e não entra no corpo.',
-            audioFile: 'colposcopia_o_que_e.mp3',
-          ),
-          StepSection(
-            'Como funciona',
-            'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho (semelhante a um grão de areia) para examinar em uma outra etapa chamada Biópsia',
-            audioFile: 'colposcopia_como_funciona.mp3',
-          ),
-          StepSection(
-            'Requisitos para o exame',
-            '• Evite relações sexuais, inclusive com camisinha, de 24 a 48 horas antes.\n• Não use duchas vaginais, cremes, óvulos ou lubrificantes vaginais nos 2 dias anteriores.\n• Não esteja menstruada. O ideal é realizar o exame de 5 a 7 dias após o término do sangramento.\n• Informe ao médico caso esteja grávida ou com suspeita de gravidez.',
-            audioFile: 'colposcopia_requisitos.mp3',
-          ),
-        ],
-      ),
-      CollectionTabContent(
-        id: 'biopsia',
-        label: 'Biópsia',
-        tip:
-            'Depois da biópsia, aguarde o resultado e siga a orientação da equipe.',
-        sections: [
-          StepSection(
-            'O que é a biópsia',
-            'Se o médico encontrar qualquer área suspeita durante a colposcopia, ele retira um pedacinho de tecido, semelhante ao tamanho de um grão de areia, para confirmar o diagnóstico em laboratório.',
-            audioFile: 'biopsia_o_que_e.mp3',
-          ),
-          StepSection(
-            'Como funciona',
-            'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho para examinar.',
-            audioFile: 'biopsia_como_funciona.mp3',
-          ),
-        ],
+    sections: [
+      StepSection('O que é a Colposcopia',
+          'É um exame em que o médico usa um aparelho com luz e lente para ver o colo do útero bem de perto. Não corta e não entra no corpo.'),
+      StepSection('Como funciona',
+          'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho (semelhante a um grão de areia) para examinar em uma outra etapa chamada Biópsia'),
+      StepSection(
+        'Requisitos para o exame',
+        '• Evite relações sexuais, inclusive com camisinha, de 24 a 48 horas antes.\n• Não use duchas vaginais, cremes, óvulos ou lubrificantes nos 2 dias anteriores.\n• Não esteja menstruada. O ideal é fazer de 5 a 7 dias depois que o sangramento terminar.\n • Informar ao médico caso  esteja grávida ou com suspeita de gravidez',
+        audioFile: 'coleta_papanicolau_requisitos.mp3',
       ),
     ],
-    tip: 'Não esqueça de levar o encaminhamento para o centro especializado.',
+    // tabs: [
+    //   CollectionTabContent(
+    //     id: 'colposcopia',
+    //     label: 'Colposcopia',
+    //     tip:
+    //         'Não esqueça de levar o encaminhamento para o centro especializado, assim como o resultado da citologia ou do Teste DNA HPV feito anteriormente.',
+    //     sections: [
+    //       StepSection(
+    //         'O que é a colposcopia',
+    //         'É um exame em que o médico usa um aparelho com luz e lente para ver o colo do útero bem de perto. Não corta e não entra no corpo.',
+    //         audioFile: 'colposcopia_o_que_e.mp3',
+    //       ),
+    //       StepSection(
+    //         'Como funciona',
+    //         'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho (semelhante a um grão de areia) para examinar em uma outra etapa chamada Biópsia',
+    //         audioFile: 'colposcopia_como_funciona.mp3',
+    //       ),
+    //       StepSection(
+    //         'Requisitos para o exame',
+    //         '• Evite relações sexuais, inclusive com camisinha, de 24 a 48 horas antes.\n• Não use duchas vaginais, cremes, óvulos ou lubrificantes vaginais nos 2 dias anteriores.\n• Não esteja menstruada. O ideal é realizar o exame de 5 a 7 dias após o término do sangramento.\n• Informe ao médico caso esteja grávida ou com suspeita de gravidez.',
+    //         audioFile: 'colposcopia_requisitos.mp3',
+    //       ),
+    //     ],
+    //   ),
+    //   CollectionTabContent(
+    //     id: 'biopsia',
+    //     label: 'Biópsia',
+    //     tip:
+    //         'Depois da biópsia, aguarde o resultado e siga a orientação da equipe.',
+    //     sections: [
+    //       StepSection(
+    //         'O que é a biópsia',
+    //         'Se o médico encontrar qualquer área suspeita durante a colposcopia, ele retira um pedacinho de tecido, semelhante ao tamanho de um grão de areia, para confirmar o diagnóstico em laboratório.',
+    //         audioFile: 'biopsia_o_que_e.mp3',
+    //       ),
+    //       StepSection(
+    //         'Como funciona',
+    //         'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho para examinar.',
+    //         audioFile: 'biopsia_como_funciona.mp3',
+    //       ),
+    //     ],
+    //   ),
+    // ],
+    tip:
+        'Não esqueça de levar o encaminhamento para o centro especializado, assim como o resultado da citologia ou teste de DNA HPV feito anteriormente',
     audio: 'etapa_colposcopia.mp3',
     illustration: 'etapa_colposcopia.png',
   ),
@@ -345,10 +356,16 @@ const Map<String, StepContent> stepContents = {
     summary: 'O cuidado continua. Veja o que acontece depois.',
     reassurance: 'Você chegou até aqui. Estamos com você.',
     sections: [
-      StepSection('O que acontece depois',
-          'Com o resultado dos exames resultados em mãos, você deve voltar ao posto de saúde para mostrar ao profissional (enfermeiro ou médico). Lá a equipe irá decidir o melhor tratamento: pode ser só acompanhar de perto, ou um pequeno tratamento. Cada caso é único.'),
-      StepSection('Por que continuar indo',
-          'Buscar o resultado dos exames e manter as consulta garante que tudo seja acompanhado e resolvido cedo. Não falte às datas marcadas.'),
+      StepSection(
+        'O que acontece depois',
+        'Com o resultado dos exames resultados em mãos, você deve voltar ao posto de saúde para mostrar ao profissional (enfermeiro ou médico). Lá a equipe irá decidir o melhor tratamento: pode ser só acompanhar de perto, ou um pequeno tratamento. Cada caso é único.',
+        audioFile: 'coleta_papanicolau_requisitos.mp3',
+      ),
+      StepSection(
+        'Por que continuar indo',
+        'Buscar o resultado dos exames e manter as consulta garante que tudo seja acompanhado e resolvido cedo. Não falte às datas marcadas.',
+        audioFile: 'coleta_papanicolau_requisitos.mp3',
+      ),
     ],
     tip: 'Volte sempre que a equipe marcar. Anote as datas para não se perder.',
     audio: 'etapa_acompanhamento.mp3',
@@ -422,6 +439,7 @@ JourneyPlan journeyForOnboarding(int index) {
           _p('resultado', StepStatus.current, 'Você está aqui'),
           _p('encaminhamento', StepStatus.next, 'Próxima etapa'),
           _p('colposcopia', StepStatus.later, 'Depois'),
+          _p('biopsia', StepStatus.later, 'Depois'),
           _p('acompanhamento', StepStatus.later, 'Depois'),
         ],
       );
@@ -435,6 +453,7 @@ JourneyPlan journeyForOnboarding(int index) {
           _p('resultado', StepStatus.done, 'Concluído'),
           _p('encaminhamento', StepStatus.current, 'Você está aqui'),
           _p('colposcopia', StepStatus.next, 'Próxima etapa'),
+          _p('biopsia', StepStatus.later, 'Depois'),
           _p('acompanhamento', StepStatus.later, 'Depois'),
         ],
       );
@@ -447,10 +466,11 @@ JourneyPlan journeyForOnboarding(int index) {
           _p('resultado', StepStatus.done, 'Concluído'),
           _p('encaminhamento', StepStatus.done, 'Concluído'),
           _p('colposcopia', StepStatus.current, 'Você está aqui'),
-          _p('acompanhamento', StepStatus.next, 'Próxima etapa'),
+          _p('biopsia', StepStatus.next, 'Próxima etapa'),
+          _p('acompanhamento', StepStatus.later, 'Depois'),
         ],
       );
-    case 4: // Já fiz a colposcopia
+    case 4:
       return JourneyPlan(
         headline: 'Você já fez a colposcopia. Agora é o acompanhamento.',
         steps: [
@@ -458,7 +478,8 @@ JourneyPlan journeyForOnboarding(int index) {
           _p('resultado', StepStatus.done, 'Concluído'),
           _p('encaminhamento', StepStatus.done, 'Concluído'),
           _p('colposcopia', StepStatus.done, 'Concluído'),
-          _p('acompanhamento', StepStatus.current, 'Você está aqui'),
+          _p('biopsia', StepStatus.current, 'Você está aqui'),
+          _p('acompanhamento', StepStatus.next, 'Próxima etapa'),
         ],
       );
     case 5: // Não sei — quero ver tudo
@@ -470,6 +491,7 @@ JourneyPlan journeyForOnboarding(int index) {
           _p('resultado', StepStatus.next, 'Próxima etapa'),
           _p('encaminhamento', StepStatus.later, 'Depois'),
           _p('colposcopia', StepStatus.later, 'Depois'),
+          _p('biopsia', StepStatus.later, 'Depois'),
           _p('acompanhamento', StepStatus.later, 'Depois'),
         ],
       );
