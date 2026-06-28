@@ -46,9 +46,9 @@ const List<IntroPage> introPages = [
     title: 'Primeiros cuidados',
     body:
         'Cuidar da sua saúde começa com exames simples de rotina.  Hoje em dia, existem duas maneiras principais de fazer essa checagem:',
-    bodySecondary: '''Existem dois tipos principais desse exame:
-
+    bodySecondary: '''
 • Papanicolau:  É o mais comum. Ele procura por pequenas alterações nas células do útero. Também pode ser chamado de citologia, preventivo ou colpositologia.
+
 • Teste DNA HPV: É um exame mais moderno. Ele procura diretamente pelo vírus que pode causar essas alterações.''',
     stepLabel: 'Passo 1 de 6',
     cta: 'Próximo',
