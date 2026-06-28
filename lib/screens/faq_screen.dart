@@ -9,26 +9,34 @@ class FaqScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
-      children: [
-        const Text('Tira-dúvidas',
-            style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w700,
-                color: AppColors.textDark)),
-        const SizedBox(height: 8),
-        const Text('Toque numa pergunta para ver a resposta.',
-            style: TextStyle(fontSize: 15, color: AppColors.textMuted)),
-        const SizedBox(height: 24),
-        const _SectionLabel('PERGUNTAS FREQUENTES'),
-        const SizedBox(height: 12),
-        ...faqItems.map((f) => _FaqTile(item: f)),
-        const SizedBox(height: 24),
-        const _SectionLabel('PALAVRAS DIFÍCEIS'),
-        const SizedBox(height: 12),
-        ...glossary.map((g) => _GlossaryTile(item: g)),
-      ],
+    return ColoredBox(
+      color: AppColors.bgRose,
+      child: ListView(
+        padding: const EdgeInsets.fromLTRB(24, 24, 24, 28),
+        children: [
+          const Text('Tira-dúvidas',
+              style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textDarkWarm)),
+          const SizedBox(height: 8),
+          const Text('Toque numa pergunta para ver a resposta.',
+              style: TextStyle(fontSize: 15, color: AppColors.textSecondary)),
+          const SizedBox(height: 26),
+          const _SectionLabel('PERGUNTAS FREQUENTES'),
+          const SizedBox(height: 16),
+          ...faqItems.indexed.map(
+            (entry) => _FaqTile(
+              item: entry.$2,
+              initiallyExpanded: entry.$1 == 0,
+            ),
+          ),
+          const SizedBox(height: 23),
+          const _SectionLabel('PALAVRAS DIFÍCEIS'),
+          const SizedBox(height: 14),
+          ...glossary.map((g) => _GlossaryTile(item: g)),
+        ],
+      ),
     );
   }
 }
@@ -42,46 +50,69 @@ class _SectionLabel extends StatelessWidget {
     return Text(text,
         style: const TextStyle(
             fontSize: 12,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0.5,
-            color: AppColors.textMuted));
+            height: 1,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.24,
+            color: AppColors.primaryPlum));
   }
 }
 
 class _FaqTile extends StatelessWidget {
-  const _FaqTile({required this.item});
+  const _FaqTile({required this.item, this.initiallyExpanded = false});
+
   final FaqItem item;
+  final bool initiallyExpanded;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.border, width: 1),
+        color: AppColors.bgSurface,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.borderWarm, width: 1),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x126B4452),
+            blurRadius: 15.75,
+            offset: Offset(0, 6),
+          ),
+        ],
       ),
       child: Theme(
         data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
+          initiallyExpanded: initiallyExpanded,
+          backgroundColor: Colors.transparent,
+          collapsedBackgroundColor: Colors.transparent,
           shape: const Border(),
           collapsedShape: const Border(),
           tilePadding: const EdgeInsets.symmetric(horizontal: 16),
           childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          iconColor: AppColors.primary,
-          collapsedIconColor: AppColors.primary,
+          iconColor: AppColors.textMutedWarm,
+          collapsedIconColor: AppColors.textMutedWarm,
           title: Text(item.question,
               style: const TextStyle(
                   fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textDark)),
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.textDarkWarm)),
           children: [
+            const Divider(
+              height: 1,
+              thickness: 1,
+              color: AppColors.borderWarm,
+            ),
+            const SizedBox(height: 10),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(item.answer,
                   style: const TextStyle(
-                      fontSize: 14, height: 1.5, color: AppColors.textMuted)),
+                      fontSize: 14,
+                      height: 1.4,
+                      color: AppColors.textSecondary)),
             ),
+            const SizedBox(height: 10),
+            const _ListenButton(label: 'Ouvir resposta'),
           ],
         ),
       ),
@@ -97,11 +128,10 @@ class _GlossaryTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.border, width: 1),
+        color: AppColors.surfaceLavender,
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,11 +140,66 @@ class _GlossaryTile extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textDark)),
-          const SizedBox(height: 4),
+                  color: AppColors.primaryDarker)),
+          const SizedBox(height: 6),
           Text(item.meaning,
-              style: const TextStyle(fontSize: 14, color: AppColors.textMuted)),
+              style: const TextStyle(
+                  fontSize: 13, color: AppColors.textSecondary)),
+          const SizedBox(height: 6),
+          const _ListenButton(label: 'Ouvir definição'),
         ],
+      ),
+    );
+  }
+}
+
+class _ListenButton extends StatelessWidget {
+  const _ListenButton({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: label,
+      child: Material(
+        color: AppColors.surfacePink,
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Áudio ainda não foi adicionado.'),
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          },
+          child: SizedBox(
+            height: 52,
+            width: double.infinity,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.volume_up_rounded,
+                  color: AppColors.primaryDark,
+                  size: 22,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: AppColors.primaryDarkest,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

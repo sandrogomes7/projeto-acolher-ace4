@@ -15,105 +15,73 @@ class SupportScreen extends StatelessWidget {
         const Text('Apoio',
             style: TextStyle(
                 fontSize: 28,
-                fontWeight: FontWeight.w700,
-                color: AppColors.textDark)),
+                fontWeight: FontWeight.w600,
+                color: AppColors.textDarkWarm)),
         const SizedBox(height: 8),
         const Text('Um espaço de cuidado com você.',
-            style: TextStyle(fontSize: 15, color: AppColors.textMuted)),
+            style: TextStyle(fontSize: 15, color: AppColors.textSecondary)),
         const SizedBox(height: 24),
-        // Destaque
         Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
           decoration: BoxDecoration(
-            color: AppColors.surfaceSoft,
+            color: AppColors.alertBg,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const Icon(Icons.favorite_rounded,
-                      color: AppColors.brandDark, size: 26),
-                  const SizedBox(width: 12),
+                  Icon(Icons.favorite_rounded,
+                      color: AppColors.alert, size: 26),
+                  SizedBox(width: 14),
                   Text(supportHighlightTitle,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textDark)),
+                          color: AppColors.alert)),
                 ],
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12),
               Text(supportHighlightBody,
-                  style: const TextStyle(
-                      fontSize: 15, height: 1.5, color: AppColors.textDark)),
+                  style: TextStyle(
+                      fontSize: 14, height: 1.45, color: AppColors.alert)),
             ],
           ),
         ),
-        const SizedBox(height: 24),
-        const _Label('MENSAGENS PARA VOCÊ'),
-        const SizedBox(height: 12),
-        ...supportMessages.map((m) => Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppColors.border, width: 1),
-              ),
-              child: Row(
-                children: [
-                  const Icon(Icons.spa_rounded,
-                      color: AppColors.primary, size: 20),
-                  const SizedBox(width: 12),
-                  Text(m,
-                      style: const TextStyle(
-                          fontSize: 15, color: AppColors.textDark)),
-                ],
-              ),
-            )),
-        const SizedBox(height: 12),
+        // const SizedBox(height: 38),
+        // const _Label('MENSAGENS PARA VOCÊ'),
+        // const SizedBox(height: 14),
+        // ...supportMessages.map((m) => Container(
+        //       height: 46,
+        //       margin: const EdgeInsets.only(bottom: 8),
+        //       padding: const EdgeInsets.symmetric(horizontal: 16),
+        //       alignment: Alignment.centerLeft,
+        //       decoration: BoxDecoration(
+        //         color: AppColors.surfaceLavender,
+        //         borderRadius: BorderRadius.circular(12),
+        //       ),
+        //       child: Text(m,
+        //           style: const TextStyle(
+        //               fontSize: 15,
+        //               fontWeight: FontWeight.w500,
+        //               color: AppColors.primaryDarker)),
+        //     )),
+        // const SizedBox(height: 4),
+        const SizedBox(height: 38),
         const _Label('ONDE BUSCAR AJUDA'),
-        const SizedBox(height: 12),
-        ...supportContacts.map((c) => Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: AppColors.border, width: 1),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 44,
-                    height: 44,
-                    decoration: const BoxDecoration(
-                      color: AppColors.surfaceSoft,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(c.icon, color: AppColors.brandDark, size: 22),
-                  ),
-                  const SizedBox(width: 14),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(c.title,
-                            style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.textDark)),
-                        const SizedBox(height: 2),
-                        Text(c.subtitle,
-                            style: const TextStyle(
-                                fontSize: 13, color: AppColors.textMuted)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            )),
+        const SizedBox(height: 20),
+        const Text(
+          'Se precisar de orientação, atendimento médico ou acolhimento, procure o posto de saúde (UBS) mais próximo da sua casa. A equipe de saúde está preparada para te ouvir, realizar os encaminhamentos necessários e garantir todo o suporte que você precisa.',
+          textAlign: TextAlign.justify,
+          style: TextStyle(
+            fontSize: 16,
+            height: 1.5,
+            color: AppColors.textDarkWarm,
+          ),
+        ),
+        const SizedBox(height: 14),
+        const _ListenButton(),
       ],
     );
   }
@@ -127,8 +95,59 @@ class _Label extends StatelessWidget {
     return Text(text,
         style: const TextStyle(
             fontSize: 12,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 0.5,
-            color: AppColors.textMuted));
+            height: 1,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.24,
+            color: AppColors.primaryPlum));
+  }
+}
+
+class _ListenButton extends StatelessWidget {
+  const _ListenButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: 'Ouvir explicação',
+      child: Material(
+        color: AppColors.surfacePink,
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Áudio ainda não foi adicionado.'),
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          },
+          child: const SizedBox(
+            height: 52,
+            width: double.infinity,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.volume_up_rounded,
+                  color: AppColors.primaryDark,
+                  size: 22,
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'Ouvir explicação',
+                  style: TextStyle(
+                    color: AppColors.primaryDarkest,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

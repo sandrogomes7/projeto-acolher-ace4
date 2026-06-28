@@ -49,11 +49,11 @@ class AppTheme {
   static ThemeData get light {
     final base = ThemeData(
       useMaterial3: true,
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: AppColors.bgRose,
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primary,
         primary: AppColors.primary,
-        surface: AppColors.background,
+        surface: AppColors.bgRose,
         brightness: Brightness.light,
       ),
     );
@@ -64,7 +64,7 @@ class AppTheme {
         displayColor: AppColors.textDark,
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.bgRose,
         foregroundColor: AppColors.textDark,
         elevation: 0,
         centerTitle: false,

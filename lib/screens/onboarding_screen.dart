@@ -29,10 +29,9 @@ class OnboardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgCream,
       appBar: asPicker
           ? AppBar(
-              backgroundColor: AppColors.bgCream,
+              backgroundColor: AppColors.bgRose,
               surfaceTintColor: Colors.transparent,
               elevation: 0,
               shadowColor: Colors.transparent,
