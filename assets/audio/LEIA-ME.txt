@@ -8,6 +8,37 @@ explicação" em cada tela toca o arquivo correspondente.
 Gere os áudios com uma IA de voz (ElevenLabs, Azure Neural
 TTS, Google Cloud TTS...) em português-BR, com voz acolhedora.
 
+------ FORMATO OBRIGATÓRIO DOS ÁUDIOS ------
+
+Para funcionar bem no Android/ExoPlayer, salve todos os áudios como:
+
+  - Formato: MP3
+  - Codec: MPEG Layer III
+  - Taxa de amostragem: 24 kHz
+  - Bitrate: 96 kbps
+  - Canais: mono
+  - Sem tag ID3v2.4 no início do arquivo
+
+O arquivo deve começar diretamente como stream MP3. Evite exportações
+que adicionam metadados ID3v2.4, pois alguns aparelhos podem não tocar.
+
+Se receber um áudio de IA ou editor externo, normalize antes de colocar
+nesta pasta:
+
+  ffmpeg -y -i entrada.mp3 -map_metadata -1 -id3v2_version 0 \
+    -ar 24000 -ac 1 -codec:a libmp3lame -b:a 96k nome_esperado.mp3
+
+Exemplo:
+
+  ffmpeg -y -i narracao.mp3 -map_metadata -1 -id3v2_version 0 \
+    -ar 24000 -ac 1 -codec:a libmp3lame -b:a 96k coleta_papanicolau_o_que_e.mp3
+
+Depois de adicionar ou substituir áudios, reinstale o app ou rode:
+
+  flutter clean
+  flutter pub get
+  flutter run
+
 ------ NOMES EXATOS DOS ARQUIVOS ESPERADOS ------
 
 Carrossel de introdução:

@@ -48,26 +48,29 @@ class _WelcomeCarouselScreenState extends State<WelcomeCarouselScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Topo: marca "Acolher" + pular
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 8, 24, 0),
               child: Row(
                 children: [
                   const Icon(Icons.favorite_rounded,
-                      color: AppColors.brandDark, size: 22),
+                      color: AppColors.primaryPlum, size: 22),
                   const SizedBox(width: 8),
-                  const Text('Acolher',
-                      style: TextStyle(
-                        color: AppColors.brandDark,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      )),
+                  const Text(
+                    'Acolher',
+                    style: TextStyle(
+                      color: AppColors.primaryDarker,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   const Spacer(),
                   if (_index < introPages.length - 1)
                     TextButton(
                       onPressed: _goToApp,
-                      child: const Text('Pular',
-                          style: TextStyle(color: AppColors.textMuted)),
+                      child: const Text(
+                        'Pular',
+                        style: TextStyle(color: AppColors.primaryDark),
+                      ),
                     ),
                 ],
               ),
@@ -77,48 +80,62 @@ class _WelcomeCarouselScreenState extends State<WelcomeCarouselScreen> {
                 controller: _controller,
                 onPageChanged: (i) => setState(() => _index = i),
                 itemCount: introPages.length,
-                itemBuilder: (context, i) => _IntroPageView(page: introPages[i]),
+                itemBuilder: (context, i) {
+                  final page = introPages[i];
+                  return _IntroPageView(
+                    page: page,
+                    showProgress: i > 0,
+                    progressValue: i > 0 ? i / (introPages.length - 1) : 0,
+                  );
+                },
               ),
             ),
-            // Indicadores de progresso (bolinhas)
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                introPages.length,
-                (i) => AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  margin: const EdgeInsets.symmetric(horizontal: 3),
-                  width: i == _index ? 22 : 8,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    color: i == _index
-                        ? AppColors.primary
-                        : AppColors.textMuted.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ),
-            ),
-            // Ações
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
               child: Column(
                 children: [
                   SizedBox(
                     width: double.infinity,
-                    child: AudioButton(audioFile: introPages[_index].audio),
-                  ),
-                  const SizedBox(height: 12),
-                  SizedBox(
-                    width: double.infinity,
-                    child: PrimaryButton(
-                      label: introPages[_index].cta,
-                      icon: _index == introPages.length - 1
-                          ? Icons.check_rounded
-                          : Icons.arrow_forward_rounded,
-                      onPressed: _next,
+                    child: AudioButton(
+                      audioFile: introPages[_index].audio,
+                      label: 'Ouvir',
                     ),
                   ),
+                  const SizedBox(height: 12),
+                  if (_index == 0)
+                    SizedBox(
+                      width: double.infinity,
+                      child: PrimaryButton(
+                        label: introPages[_index].cta,
+                        icon: Icons.arrow_forward_rounded,
+                        onPressed: _next,
+                      ),
+                    )
+                  else
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _SecondaryButton(
+                            label: 'Voltar',
+                            icon: Icons.arrow_back_rounded,
+                            onPressed: () => _controller.previousPage(
+                              duration: const Duration(milliseconds: 280),
+                              curve: Curves.easeInOut,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: PrimaryButton(
+                            label: introPages[_index].cta,
+                            icon: _index == introPages.length - 1
+                                ? Icons.check_rounded
+                                : Icons.arrow_forward_rounded,
+                            onPressed: _next,
+                          ),
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -130,28 +147,46 @@ class _WelcomeCarouselScreenState extends State<WelcomeCarouselScreen> {
 }
 
 class _IntroPageView extends StatelessWidget {
-  const _IntroPageView({required this.page});
+  const _IntroPageView({
+    required this.page,
+    required this.showProgress,
+    required this.progressValue,
+  });
   final IntroPage page;
+  final bool showProgress;
+  final double progressValue;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
+      padding: const EdgeInsets.fromLTRB(24, 10, 24, 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (page.stepLabel != null) ...[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text(page.stepLabel!,
-                  style: const TextStyle(
-                      color: AppColors.textMuted,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500)),
+          if (showProgress) ...[
+            Text(
+              page.stepLabel ?? '',
+              style: const TextStyle(
+                color: AppColors.textMuted,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 10),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(999),
+              child: LinearProgressIndicator(
+                value: progressValue,
+                minHeight: 8,
+                backgroundColor: AppColors.textMuted.withValues(alpha: 0.14),
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(AppColors.primaryPlum),
+              ),
+            ),
+            const SizedBox(height: 16),
           ],
-          AppIllustration(imageName: page.illustration),
-          const SizedBox(height: 28),
+          AppIllustration(imageName: page.illustration, height: 244),
+          const SizedBox(height: 24),
           Text(
             page.title,
             textAlign: TextAlign.center,
@@ -172,7 +207,78 @@ class _IntroPageView extends StatelessWidget {
               height: 1.5,
             ),
           ),
+          if (page.bodySecondary != null) ...[
+            const SizedBox(height: 16),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: AppColors.surfaceWarm,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: AppColors.borderLight, width: 1),
+              ),
+              child: Text(
+                page.bodySecondary!,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  color: AppColors.textBody,
+                  fontSize: 15,
+                  height: 1.55,
+                ),
+              ),
+            ),
+          ],
         ],
+      ),
+    );
+  }
+}
+
+class _SecondaryButton extends StatelessWidget {
+  const _SecondaryButton({
+    required this.label,
+    required this.onPressed,
+    this.icon,
+  });
+
+  final String label;
+  final VoidCallback onPressed;
+  final IconData? icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: AppColors.surfaceWarm,
+      borderRadius: BorderRadius.circular(16),
+      elevation: 0,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: onPressed,
+        child: Container(
+          height: 58,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.borderLight, width: 1),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (icon != null) ...[
+                Icon(icon, color: AppColors.textBody, size: 20),
+                const SizedBox(width: 8),
+              ],
+              Text(
+                label,
+                style: const TextStyle(
+                  color: AppColors.textBody,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

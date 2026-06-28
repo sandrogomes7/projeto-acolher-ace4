@@ -19,6 +19,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_native_splash: ^2.4.8
 
 flutter:
   uses-material-design: true
@@ -32,3 +33,13 @@ flutter:
     # Coloque as imagens em assets/illustrations/ (nomes no LEIA-ME).
     # Enquanto não existirem, o app usa um placeholder e não quebra.
     - assets/illustrations/
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  color: "#FFF7F4"
+  image: assets/branding/splash_logo.png
+  android_12:
+    color: "#FFF7F4"
+    image: assets/branding/splash_logo.png

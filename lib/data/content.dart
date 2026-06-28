@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 class IntroPage {
   final String title;
   final String body;
+  final String? bodySecondary;
   final String? stepLabel;
   final String cta;
   final String audio; // assets/audio/<audio>
@@ -27,6 +28,7 @@ class IntroPage {
     required this.cta,
     required this.audio,
     required this.illustration,
+    this.bodySecondary,
     this.stepLabel,
   });
 }
@@ -35,61 +37,70 @@ const List<IntroPage> introPages = [
   IntroPage(
     title: 'Vamos te acompanhar',
     body:
-        'Este app explica, com calma, cada passo do seu cuidado. Você pode ouvir tudo em áudio.',
+        'Este aplicativo explica, com calma, cada passo do seu cuidado. Você pode ouvir tudo em áudio.',
     cta: 'Começar',
-    audio: 'intro_0.mp3',
-    illustration: 'intro_0.png',
+    audio: 'vamos_te_acompanhar.mp3',
+    illustration: 'welcome.png',
   ),
   IntroPage(
-    title: 'O exame preventivo',
+    title: 'Primeiros cuidados',
     body:
-        '''É o exame que você fez no posto. Ele serve para olhar o colo do útero e ter certeza de que está tudo bem.
+        'Cuidar da sua saúde começa com exames simples de rotina.  Hoje em dia, existem duas maneiras principais de fazer essa checagem:',
+    bodySecondary: '''Existem dois tipos principais desse exame:
 
-Existem dois tipos principais desse exame:
-
-Papanicolau: É o mais comum. Ele procura por pequenas alterações nas células do útero.
-
-DNA de HPV: É um exame mais moderno. Ele procura diretamente pelo vírus que pode causar essas alterações.''',
-    stepLabel: 'Passo 1 de 5',
+• Papanicolau:  É o mais comum. Ele procura por pequenas alterações nas células do útero. Também pode ser chamado de citologia, preventivo ou colpositologia.
+• Teste DNA HPV: É um exame mais moderno. Ele procura diretamente pelo vírus que pode causar essas alterações.''',
+    stepLabel: 'Passo 1 de 6',
     cta: 'Próximo',
-    audio: 'intro_1.mp3',
-    illustration: 'intro_1.png',
+    audio: 'o_exame_preventivo.mp3',
+    illustration: 'o_exame_preventivo.png',
   ),
   IntroPage(
-    title: 'Seu resultado veio alterado',
+    title: 'Entendendo seu resultado',
     body:
-        'Alterado não quer dizer câncer. Quer dizer que precisamos olhar melhor, por segurança.',
-    stepLabel: 'Passo 2 de 5',
+        'Receber um resultado alterado pode assustar, mas não significa que você tem câncer. Na verdade, isso quer dizer apenas que o exame cumpriu o seu papel de prevenção: ele acendeu um sinal amarelo para que o médico olhe tudo mais de perto, por pura segurança. É o momento de investigar com calma para cuidar de você da melhor forma possível.',
+    stepLabel: 'Passo 2 de 6',
     cta: 'Próximo',
-    audio: 'intro_2.mp3',
-    illustration: 'intro_2.png',
+    audio: 'seu_resultado_veio_alterado.mp3',
+    illustration: 'seu_resultado_veio_alterado.png',
   ),
   IntroPage(
-    title: 'Você vai a um serviço especial',
+    title: 'Consulta em Centro de Especialidade',
     body:
-        'Lá tem médico para olhar de perto. É normal e seguro. Leve seu documento e o resultado do exame.',
-    stepLabel: 'Passo 3 de 5',
+        'Se a enfermeira ou médica recomendou uma visita a um centro de especialidade, fique tranquila: isso faz parte do protocolo normal de segurança. Lá, você será atendida por uma equipe focada em olhar para o seu caso com ainda mais atenção e carinho. É um ambiente seguro, preparado exatamente para tirar todas as dúvidas.',
+    stepLabel: 'Passo 3 de 6',
     cta: 'Próximo',
     audio: 'intro_3.mp3',
-    illustration: 'intro_3.png',
+    illustration: 'voce_vai_a_um_servico_especial.png',
   ),
   IntroPage(
-    title: 'O que é colposcopia',
+    title: 'O que é a Colposcopia',
     body:
-        'Um aparelho vê o colo do útero de pertinho. Não corta. Pode sentir um leve incômodo, como no preventivo.',
-    stepLabel: 'Passo 4 de 5',
+        'A colposcopia é um exame bem simples e seguro. Para realizá-lo, o médico usa um aparelho chamado colposcópio, que funciona como uma espécie de binóculo com luz. Ele fica posicionado do lado de fora do corpo, apenas iluminando e ampliando a imagem para ver o colo do útero bem de pertinho.',
+    stepLabel: 'Passo 4 de 6',
     cta: 'Próximo',
     audio: 'intro_4.mp3',
-    illustration: 'intro_4.png',
+    illustration: 'colposcopia.jpeg',
+  ),
+  IntroPage(
+    title: 'O que é a Biópsia',
+    body:
+        '''Durante a colposcopia, se o médico encontrar alguma área suspeita, ele retirará um pequeno pedaço de tecido para análise. 
+
+Esse material será enviado a um laboratório de patologia. Depois de pronto, você deverá retirar o resultado no laboratório para dar andamento aos próximos passos do seu atendimento.''',
+    stepLabel: 'Passo 4 de 6',
+    cta: 'Próximo',
+    audio: 'intro_4.mp3',
+    illustration: 'colposcopia.jpeg',
   ),
   IntroPage(
     title: 'Você não está sozinha',
     body:
-        'Siga as orientações da equipe. Volte sempre que marcarem. Estamos com você.',
-    stepLabel: 'Passo 5 de 5',
+        'O cuidado com a sua saúde é um caminho que trilhamos juntas. Agora que você já conhece os próximos passos, o segredo é manter a calma e seguir em frente. Toda a equipe de saúde está preparada para acompanhar você de perto, com toda a segurança e atenção que você merece.',
+    stepLabel: 'Passo 5 de 6',
     cta: 'Concluir',
     audio: 'intro_5.mp3',
-    illustration: 'intro_5.png',
+    illustration: 'voce_nao_esta_sozinha.png',
   ),
 ];
 
@@ -169,9 +180,9 @@ const List<IconData> onboardingIcons = [
 
 /// Mapa central de todos os nós do fluxograma.
 const Map<String, StepContent> stepContents = {
-  'coleta': StepContent(
-    id: 'coleta',
-    title: 'Coleta do preventivo',
+  'primeiros-cuidados': StepContent(
+    id: 'primeiros-cuidados',
+    title: 'Primeiros Cuidados',
     summary: 'O primeiro passo do seu cuidado, feito no posto.',
     reassurance: 'A coleta é rápida. Se sentir medo, avise a profissional.',
     sections: [],
@@ -184,14 +195,12 @@ const Map<String, StepContent> stepContents = {
         sections: [
           StepSection('O que é o Papanicolau',
               'O preventivo, ou Papanicolau, é um exame simples feito no posto. A enfermeira coleta uma pequena amostra do colo do útero através de uma escovinha, sem dor, para ver se está tudo bem.',
-              audioFile: 'coleta_papanicolau_o_que_e.mp3'
-              // audioFile: 'coleta_papanicolau_o_que_e.mp3',
-              ),
-          StepSection(
-            'Como funciona',
-            'Você se deita como no preventivo. A profissional usa um pequeno instrumento para visualizar o colo do útero e coleta a amostra com uma escovinha ou espátula. Pode causar um leve incômodo, mas costuma ser rápido.',
-            audioFile: 'coleta_papanicolau_como_funciona.mp3',
-          ),
+              audioFile: 'coleta_papanicolau_o_que_e.mp3'),
+          // StepSection(
+          //   'Como funciona',
+          //   'Você se deita como no preventivo. A profissional usa um pequeno instrumento para visualizar o colo do útero e coleta a amostra com uma escovinha ou espátula. Pode causar um leve incômodo, mas costuma ser rápido.',
+          //   audioFile: 'coleta_papanicolau_como_funciona.mp3',
+          // ),
           StepSection(
             'Requisitos para o exame',
             '• Evite relações sexuais, inclusive com camisinha, de 24 a 48 horas antes.\n• Não use duchas vaginais, cremes, óvulos ou lubrificantes nos 2 dias anteriores.\n• Não esteja menstruada. O ideal é fazer de 5 a 7 dias depois que o sangramento terminar.',
@@ -210,11 +219,11 @@ const Map<String, StepContent> stepContents = {
             'É um exame feito com a coleta no colo do útero. Ele procura sinais do HPV, vírus que pode causar alterações antes de virar doença.',
             audioFile: 'coleta_dna_hpv_o_que_e.mp3',
           ),
-          StepSection(
-            'Por que ele é importante',
-            'Quando encontra o vírus cedo, a equipe consegue acompanhar melhor e evitar problemas no futuro. A coleta é parecida com a do preventivo.',
-            audioFile: 'coleta_dna_hpv_importancia.mp3',
-          ),
+          // StepSection(
+          //   'Por que ele é importante',
+          //   'Quando encontra o vírus cedo, a equipe consegue acompanhar melhor e evitar problemas no futuro. A coleta é parecida com a do preventivo.',
+          //   audioFile: 'coleta_dna_hpv_importancia.mp3',
+          // ),
           StepSection(
             'Requisitos para o exame',
             '• Evite relações sexuais, inclusive com camisinha, de 24 a 48 horas antes.\n• Não use duchas vaginais, cremes, óvulos ou lubrificantes nos 2 dias anteriores.\n• Não esteja menstruada. O ideal é fazer de 5 a 7 dias depois que o sangramento terminar.\n• Avise a profissional se estiver grávida ou se houver suspeita de gravidez.',
@@ -229,8 +238,9 @@ const Map<String, StepContent> stepContents = {
   ),
   'resultado': StepContent(
     id: 'resultado',
-    title: 'Resultado do exame',
-    summary: 'Agora é entender o que o resultado do seu exame indica.',
+    title: 'Resultado dos exames',
+    summary:
+        'Agora é entender o que o resultado do seu exame indica. O resultado pode seguir três caminhos:',
     reassurance: 'Receber um resultado pode dar medo. Vamos com calma.',
     sections: [
       StepSection('Tudo certo (NILM)',
@@ -280,7 +290,7 @@ const Map<String, StepContent> stepContents = {
           ),
           StepSection(
             'Como funciona',
-            'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho semelhante a um grão de areia para examinar.',
+            'Você fica deitada, como no preventivo. Pode sentir um leve incômodo e dura poucos minutos. Às vezes o médico coleta um pedacinho (semelhante a um grão de areia) para examinar em uma outra etapa chamada Biópsia',
             audioFile: 'colposcopia_como_funciona.mp3',
           ),
           StepSection(
@@ -313,18 +323,34 @@ const Map<String, StepContent> stepContents = {
     audio: 'etapa_colposcopia.mp3',
     illustration: 'etapa_colposcopia.png',
   ),
+  'biopsia': StepContent(
+    id: 'biopsia',
+    title: 'Biópsia',
+    summary: 'Agora é entender o que o resultado do seu exame indica.',
+    reassurance: 'Receber um resultado pode dar medo. Vamos com calma.',
+    sections: [
+      StepSection('O que é a Biópsia',
+          'Se o médico encontrar qualquer área suspeita durante a colposcopia, ele retira um pedacinho de tecido (semelhante ao tamanho de um grão de areia) para mandar confirmar o diagnóstico em laboratório.'),
+      StepSection('Como funciona',
+          'O material coletado no exame de colposcopia será enviado para o laboratório de patologia. Lá você deve buscar o resultado depois de pronto para seguir com as próximas etapas.'),
+    ],
+    tip:
+        'Depois da coleta, aguarde o resultado e siga a orientação da equipe. O exame é realizado todo ano nos dois primeiros ano e caso esteja tudo certo, se repetirá a cada 3 anos',
+    audio: 'etapa_resultado.mp3',
+    illustration: 'etapa_resultado.png',
+  ),
   'acompanhamento': StepContent(
     id: 'acompanhamento',
-    title: 'Conduta e acompanhamento',
+    title: 'Acompanhamento',
     summary: 'O cuidado continua. Veja o que acontece depois.',
     reassurance: 'Você chegou até aqui. Estamos com você.',
     sections: [
       StepSection('O que acontece depois',
-          'Com o resultado da biópsia, o médico decide o cuidado: pode ser só acompanhar de perto (Normal, NIC I), uma pequena cirurgia (NIC II, NIC III) ou um serviço especializado em casos mais sérios. Cada caso é único.'),
+          'Com o resultado dos exames resultados em mãos, você deve voltar ao posto de saúde para mostrar ao profissional (enfermeiro ou médico). Lá a equipe irá decidir o melhor tratamento: pode ser só acompanhar de perto, ou um pequeno tratamento. Cada caso é único.'),
       StepSection('Por que continuar indo',
-          'Manter as consultas garante que tudo seja acompanhado e resolvido cedo. Não falte às datas marcadas.'),
+          'Buscar o resultado dos exames e manter as consulta garante que tudo seja acompanhado e resolvido cedo. Não falte às datas marcadas.'),
     ],
-    tip: 'Volte sempre que a equipe marcar. Anote as datas.',
+    tip: 'Volte sempre que a equipe marcar. Anote as datas para não se perder.',
     audio: 'etapa_acompanhamento.mp3',
     illustration: 'etapa_acompanhamento.png',
   ),
@@ -392,7 +418,7 @@ JourneyPlan journeyForOnboarding(int index) {
       return JourneyPlan(
         headline: 'Você fez o preventivo. Agora é aguardar o resultado.',
         steps: [
-          _p('coleta', StepStatus.done, 'Concluído'),
+          _p('primeiros-cuidados', StepStatus.done, 'Concluído'),
           _p('resultado', StepStatus.current, 'Você está aqui'),
           _p('encaminhamento', StepStatus.next, 'Próxima etapa'),
           _p('colposcopia', StepStatus.later, 'Depois'),
@@ -405,7 +431,7 @@ JourneyPlan journeyForOnboarding(int index) {
         headline:
             'Seu exame teve uma alteração. Vamos juntas no próximo passo.',
         steps: [
-          _p('coleta', StepStatus.done, 'Concluído'),
+          _p('primeiros-cuidados', StepStatus.done, 'Concluído'),
           _p('resultado', StepStatus.done, 'Concluído'),
           _p('encaminhamento', StepStatus.current, 'Você está aqui'),
           _p('colposcopia', StepStatus.next, 'Próxima etapa'),
@@ -417,7 +443,7 @@ JourneyPlan journeyForOnboarding(int index) {
         headline:
             'A colposcopia é o seu próximo passo. Saber o que esperar ajuda.',
         steps: [
-          _p('coleta', StepStatus.done, 'Concluído'),
+          _p('primeiros-cuidados', StepStatus.done, 'Concluído'),
           _p('resultado', StepStatus.done, 'Concluído'),
           _p('encaminhamento', StepStatus.done, 'Concluído'),
           _p('colposcopia', StepStatus.current, 'Você está aqui'),
@@ -428,7 +454,7 @@ JourneyPlan journeyForOnboarding(int index) {
       return JourneyPlan(
         headline: 'Você já fez a colposcopia. Agora é o acompanhamento.',
         steps: [
-          _p('coleta', StepStatus.done, 'Concluído'),
+          _p('primeiros-cuidados', StepStatus.done, 'Concluído'),
           _p('resultado', StepStatus.done, 'Concluído'),
           _p('encaminhamento', StepStatus.done, 'Concluído'),
           _p('colposcopia', StepStatus.done, 'Concluído'),
@@ -440,7 +466,7 @@ JourneyPlan journeyForOnboarding(int index) {
       return JourneyPlan(
         headline: 'Veja a jornada completa, com calma.',
         steps: [
-          _p('coleta', StepStatus.current, 'Comece por aqui'),
+          _p('primeiros-cuidados', StepStatus.current, 'Comece por aqui'),
           _p('resultado', StepStatus.next, 'Próxima etapa'),
           _p('encaminhamento', StepStatus.later, 'Depois'),
           _p('colposcopia', StepStatus.later, 'Depois'),

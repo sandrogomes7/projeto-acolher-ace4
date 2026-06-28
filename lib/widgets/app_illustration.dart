@@ -13,36 +13,49 @@ class AppIllustration extends StatelessWidget {
     this.imageName,
     this.fallbackIcon = Icons.favorite_rounded,
     this.height = 200,
+    this.borderRadius = 28,
   });
 
   final String? imageName;
   final IconData fallbackIcon;
   final double height;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: height,
       width: double.infinity,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: AppColors.surfaceSoft,
-        borderRadius: BorderRadius.circular(28),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.06),
-            blurRadius: 24,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
+      // Configurações abaixo desenhavam o quadrado rosa em volta da imagem.
+      // clipBehavior: Clip.antiAlias,
+      // decoration: BoxDecoration(
+      //   color: AppColors.surfaceSoft,
+      //   borderRadius: BorderRadius.circular(28),
+      //   boxShadow: [
+      //     BoxShadow(
+      //       color: Colors.black.withValues(alpha: 0.06),
+      //       blurRadius: 24,
+      //       offset: const Offset(0, 8),
+      //     ),
+      //   ],
+      // ),
       child: imageName == null
           ? _Placeholder(icon: fallbackIcon)
-          : Image.asset(
-              'assets/illustrations/$imageName',
-              fit: BoxFit.cover,
-              // Se a imagem ainda não foi adicionada, cai no placeholder.
-              errorBuilder: (_, __, ___) => _Placeholder(icon: fallbackIcon),
+          : Padding(
+              padding: const EdgeInsets.all(4),
+              child: Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(borderRadius),
+                  child: Image.asset(
+                    'assets/illustrations/$imageName',
+                    height: height - 8,
+                    fit: BoxFit.contain,
+                    // Se a imagem ainda não foi adicionada, cai no placeholder.
+                    errorBuilder: (_, __, ___) =>
+                        _Placeholder(icon: fallbackIcon),
+                  ),
+                ),
+              ),
             ),
     );
   }
@@ -64,7 +77,7 @@ class _Placeholder extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.10),
+              color: AppColors.primary.withValues(alpha: 0.10),
               shape: BoxShape.circle,
             ),
           ),
@@ -73,7 +86,7 @@ class _Placeholder extends StatelessWidget {
           width: 130,
           height: 130,
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.12),
+            color: AppColors.primary.withValues(alpha: 0.12),
             shape: BoxShape.circle,
           ),
         ),
