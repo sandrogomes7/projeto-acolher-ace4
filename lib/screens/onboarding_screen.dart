@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/content.dart';
+import '../services/journey_progress_store.dart';
 import '../theme/app_theme.dart';
 import 'home_shell.dart';
 
@@ -15,14 +16,20 @@ class OnboardingScreen extends StatelessWidget {
 
   final bool asPicker;
 
-  void _enter(BuildContext context, int index) {
+  Future<void> _enter(BuildContext context, int index) async {
+    await JourneyProgressStore.saveSituationIndex(index);
+    if (!context.mounted) return;
+
     if (asPicker) {
       Navigator.of(context).pop(index);
       return;
     }
-    final plan = journeyForOnboarding(index);
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => HomeShell(plan: plan)),
+      MaterialPageRoute(
+        builder: (_) => HomeShell(
+          currentStepIndex: currentStepIndexForOnboarding(index),
+        ),
+      ),
     );
   }
 

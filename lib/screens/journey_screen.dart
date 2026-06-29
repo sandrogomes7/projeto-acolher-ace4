@@ -6,10 +6,16 @@ import 'step_detail_screen.dart';
 
 /// "Minha jornada" — mostra SÓ o caminho da paciente (definido no onboarding).
 class JourneyScreen extends StatelessWidget {
-  const JourneyScreen({super.key, required this.plan, this.onChangeSituation});
+  const JourneyScreen({
+    super.key,
+    required this.plan,
+    this.onChangeSituation,
+    this.onAdvanceStep,
+  });
 
   final JourneyPlan plan;
   final VoidCallback? onChangeSituation;
+  final VoidCallback? onAdvanceStep;
 
   void _openStep(
       BuildContext context, PlannedStep step, int number, int total) {
@@ -54,6 +60,10 @@ class JourneyScreen extends StatelessWidget {
             isLast: i == plan.steps.length - 1,
             onOpen: () =>
                 _openStep(context, plan.steps[i], i + 1, plan.steps.length),
+            onAdvance: i == plan.currentStepIndex &&
+                    i < plan.steps.length - 1
+                ? onAdvanceStep
+                : null,
           );
         }),
       ],
@@ -89,11 +99,13 @@ class _TimelineTile extends StatelessWidget {
     required this.step,
     required this.isLast,
     required this.onOpen,
+    this.onAdvance,
   });
 
   final PlannedStep step;
   final bool isLast;
   final VoidCallback onOpen;
+  final VoidCallback? onAdvance;
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +131,11 @@ class _TimelineTile extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 18),
               child: isCurrent
-                  ? _CurrentCard(step: step, onOpen: onOpen)
+                  ? _CurrentCard(
+                      step: step,
+                      onOpen: onOpen,
+                      onAdvance: onAdvance,
+                    )
                   : _PlainRow(step: step, onOpen: onOpen),
             ),
           ),
@@ -218,9 +234,15 @@ class _PlainRow extends StatelessWidget {
 
 /// Card destacado da etapa atual ("Você está aqui").
 class _CurrentCard extends StatelessWidget {
-  const _CurrentCard({required this.step, required this.onOpen});
+  const _CurrentCard({
+    required this.step,
+    required this.onOpen,
+    this.onAdvance,
+  });
+
   final PlannedStep step;
   final VoidCallback onOpen;
+  final VoidCallback? onAdvance;
 
   @override
   Widget build(BuildContext context) {
@@ -291,6 +313,41 @@ class _CurrentCard extends StatelessWidget {
               ),
             ),
           ),
+          if (onAdvance != null) ...[
+            const SizedBox(height: 10),
+            Material(
+              color: AppColors.bgSurface,
+              borderRadius: BorderRadius.circular(12),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(12),
+                onTap: onAdvance,
+                child: Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border:
+                        Border.all(color: AppColors.primaryPlum, width: 1.2),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.check_rounded,
+                          color: AppColors.primaryPlum, size: 18),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Text('Passei para a próxima etapa',
+                            style: TextStyle(
+                                color: AppColors.primaryPlum,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );

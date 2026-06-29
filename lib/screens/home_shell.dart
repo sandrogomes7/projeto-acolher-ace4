@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/content.dart';
+import '../services/journey_progress_store.dart';
 import '../theme/app_theme.dart';
 import 'journey_screen.dart';
 import 'faq_screen.dart';
@@ -9,9 +10,9 @@ import 'support_screen.dart';
 
 /// Casca com a barra inferior: Jornada · Dúvidas · Apoio.
 class HomeShell extends StatefulWidget {
-  const HomeShell({super.key, required this.plan});
+  const HomeShell({super.key, required this.currentStepIndex});
 
-  final JourneyPlan plan;
+  final int currentStepIndex;
 
   @override
   State<HomeShell> createState() => _HomeShellState();
@@ -19,7 +20,8 @@ class HomeShell extends StatefulWidget {
 
 class _HomeShellState extends State<HomeShell> {
   int _index = 0;
-  late JourneyPlan _plan = widget.plan;
+  late int _currentStepIndex = widget.currentStepIndex;
+  late JourneyPlan _plan = journeyForCurrentStepIndex(_currentStepIndex);
 
   /// Reabre a tela "Onde você está agora?" e remonta o caminho.
   Future<void> _changeSituation() async {
@@ -27,14 +29,36 @@ class _HomeShellState extends State<HomeShell> {
       MaterialPageRoute(builder: (_) => const OnboardingScreen(asPicker: true)),
     );
     if (index != null) {
-      setState(() => _plan = journeyForOnboarding(index));
+      await JourneyProgressStore.saveSituationIndex(index);
+      if (!mounted) return;
+      setState(() {
+        _currentStepIndex = currentStepIndexForOnboarding(index);
+        _plan = journeyForCurrentStepIndex(_currentStepIndex);
+      });
     }
+  }
+
+  Future<void> _advanceStep() async {
+    if (_currentStepIndex >= _plan.steps.length - 1) return;
+
+    final nextStepIndex = _currentStepIndex + 1;
+    await JourneyProgressStore.saveCurrentStepIndex(nextStepIndex);
+    if (!mounted) return;
+
+    setState(() {
+      _currentStepIndex = nextStepIndex;
+      _plan = journeyForCurrentStepIndex(_currentStepIndex);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final pages = [
-      JourneyScreen(plan: _plan, onChangeSituation: _changeSituation),
+      JourneyScreen(
+        plan: _plan,
+        onChangeSituation: _changeSituation,
+        onAdvanceStep: _advanceStep,
+      ),
       const FaqScreen(),
       const SupportScreen(),
     ];

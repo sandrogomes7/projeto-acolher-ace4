@@ -40,7 +40,7 @@ const List<IntroPage> introPages = [
         'Este aplicativo explica, com calma, cada passo do seu cuidado. Você pode ouvir tudo em áudio.',
     cta: 'Começar',
     audio: 'vamos_te_acompanhar.mp3',
-    illustration: 'welcome.png',
+    illustration: 'welcome.jpeg',
   ),
   IntroPage(
     title: 'Primeiros cuidados',
@@ -53,7 +53,7 @@ const List<IntroPage> introPages = [
     stepLabel: 'Passo 1 de 6',
     cta: 'Próximo',
     audio: 'o_exame_preventivo.mp3',
-    illustration: 'o_exame_preventivo.png',
+    illustration: 'etapa_coleta.png',
   ),
   IntroPage(
     title: 'Entendendo seu resultado',
@@ -62,7 +62,7 @@ const List<IntroPage> introPages = [
     stepLabel: 'Passo 2 de 6',
     cta: 'Próximo',
     audio: 'seu_resultado_veio_alterado.mp3',
-    illustration: 'seu_resultado_veio_alterado.png',
+    illustration: 'etapa_resultado.png',
   ),
   IntroPage(
     title: 'Consulta em Centro de Especialidade',
@@ -80,7 +80,7 @@ const List<IntroPage> introPages = [
     stepLabel: 'Passo 4 de 6',
     cta: 'Próximo',
     audio: 'intro_4.mp3',
-    illustration: 'colposcopia.jpeg',
+    illustration: 'etapa_colposcopia.png',
   ),
   IntroPage(
     title: 'O que é a Biópsia',
@@ -90,8 +90,8 @@ const List<IntroPage> introPages = [
 Esse material será enviado a um laboratório de patologia. Depois de pronto, você deverá retirar o resultado no laboratório para dar andamento aos próximos passos do seu atendimento.''',
     stepLabel: 'Passo 4 de 6',
     cta: 'Próximo',
-    audio: 'intro_4.mp3',
-    illustration: 'colposcopia.jpeg',
+    audio: 'intro_biopsia.mp3',
+    illustration: 'etapa_colposcopia.png',
   ),
   IntroPage(
     title: 'Você não está sozinha',
@@ -100,14 +100,14 @@ Esse material será enviado a um laboratório de patologia. Depois de pronto, vo
     stepLabel: 'Passo 5 de 6',
     cta: 'Concluir',
     audio: 'intro_5.mp3',
-    illustration: 'voce_nao_esta_sozinha.png',
+    illustration: 'voce_nao_esta_sozinha.jpeg',
   ),
 ];
 
 /// ---------- Onboarding "Onde você está" ----------
 const String onboardingTitle = 'Onde você está agora?';
 const String onboardingSubtitle =
-    'Toque na etapa em que você está. O app não guarda nenhuma informação sobre você.';
+    'Toque na etapa em que você está. O app guarda apenas esta escolha neste aparelho para não perder seu progresso.';
 
 /// As opções estão na MESMA ordem usada pelo motor `journeyForOnboarding`.
 const List<String> onboardingOptions = [
@@ -268,7 +268,7 @@ const Map<String, StepContent> stepContents = {
     ],
     tip: 'Leve seu documento e o resultado do preventivo.',
     audio: 'etapa_encaminhamento.mp3',
-    illustration: 'etapa_encaminhamento.png',
+    illustration: 'voce_vai_a_um_servico_especial.png',
   ),
   'colposcopia': StepContent(
     id: 'colposcopia',
@@ -369,7 +369,7 @@ const Map<String, StepContent> stepContents = {
     ],
     tip: 'Volte sempre que a equipe marcar. Anote as datas para não se perder.',
     audio: 'etapa_acompanhamento.mp3',
-    illustration: 'etapa_acompanhamento.png',
+    illustration: 'etapa_acompanhamento.jpeg',
   ),
   // ----- Nós terminais dos caminhos A e B (aparecem em "todos os caminhos") -----
   'rotina': StepContent(
@@ -385,7 +385,7 @@ const Map<String, StepContent> stepContents = {
     ],
     tip: 'Não deixe de repetir o preventivo no prazo.',
     audio: 'etapa_rotina.mp3',
-    illustration: 'etapa_rotina.png',
+    illustration: 'etapa_rotina.jpeg',
   ),
   'repetir': StepContent(
     id: 'repetir',
@@ -400,7 +400,7 @@ const Map<String, StepContent> stepContents = {
     ],
     tip: 'Volte para repetir o exame na data combinada.',
     audio: 'etapa_repetir.mp3',
-    illustration: 'etapa_repetir.png',
+    illustration: 'etapa_resultado.png',
   ),
 };
 
@@ -418,9 +418,11 @@ class PlannedStep {
 
 class JourneyPlan {
   final String headline;
+  final int currentStepIndex;
   final List<PlannedStep> steps;
   const JourneyPlan({
     required this.headline,
+    required this.currentStepIndex,
     required this.steps,
   });
 }
@@ -428,11 +430,88 @@ class JourneyPlan {
 PlannedStep _p(String id, StepStatus s, String label) =>
     PlannedStep(stepContents[id]!, s, label);
 
+const List<String> _journeyStepIds = [
+  'primeiros-cuidados',
+  'resultado',
+  'encaminhamento',
+  'colposcopia',
+  'biopsia',
+  'acompanhamento',
+];
+
+int currentStepIndexForOnboarding(int index) {
+  switch (index) {
+    case 0:
+      return 1;
+    case 1:
+    case 2:
+      return 2;
+    case 3:
+      return 3;
+    case 4:
+      return 4;
+    case 5:
+    default:
+      return 0;
+  }
+}
+
+String _headlineForCurrentStep(int index) {
+  switch (index) {
+    case 0:
+      return 'Veja a jornada completa, com calma.';
+    case 1:
+      return 'Você fez o preventivo. Agora é aguardar o resultado.';
+    case 2:
+      return 'Seu exame teve uma alteração. Vamos juntas no próximo passo.';
+    case 3:
+      return 'A colposcopia é o seu próximo passo. Saber o que esperar ajuda.';
+    case 4:
+      return 'Você já fez a colposcopia. Agora é o acompanhamento.';
+    case 5:
+    default:
+      return 'Você chegou ao acompanhamento. O cuidado continua.';
+  }
+}
+
+String _statusLabelForStep(int stepIndex, int currentStepIndex) {
+  if (stepIndex < currentStepIndex) return 'Concluído';
+  if (stepIndex == currentStepIndex) {
+    return currentStepIndex == 0 ? 'Comece por aqui' : 'Você está aqui';
+  }
+  if (stepIndex == currentStepIndex + 1) return 'Próxima etapa';
+  return 'Depois';
+}
+
+StepStatus _statusForStep(int stepIndex, int currentStepIndex) {
+  if (stepIndex < currentStepIndex) return StepStatus.done;
+  if (stepIndex == currentStepIndex) return StepStatus.current;
+  if (stepIndex == currentStepIndex + 1) return StepStatus.next;
+  return StepStatus.later;
+}
+
+JourneyPlan journeyForCurrentStepIndex(int index) {
+  final currentStepIndex = index.clamp(0, _journeyStepIds.length - 1).toInt();
+
+  return JourneyPlan(
+    headline: _headlineForCurrentStep(currentStepIndex),
+    currentStepIndex: currentStepIndex,
+    steps: List.generate(_journeyStepIds.length, (i) {
+      return _p(
+        _journeyStepIds[i],
+        _statusForStep(i, currentStepIndex),
+        _statusLabelForStep(i, currentStepIndex),
+      );
+    }),
+  );
+}
+
 /// Recebe o índice escolhido no onboarding e devolve a jornada.
 JourneyPlan journeyForOnboarding(int index) {
   switch (index) {
     case 0: // Fiz o exame preventivo -> aguardando resultado
       return JourneyPlan(
+        currentStepIndex: 1,
         headline: 'Você fez o preventivo. Agora é aguardar o resultado.',
         steps: [
           _p('primeiros-cuidados', StepStatus.done, 'Concluído'),
@@ -446,6 +525,7 @@ JourneyPlan journeyForOnboarding(int index) {
     case 1: // Recebi um resultado alterado
     case 2: // Fui encaminhada a outro serviço
       return JourneyPlan(
+        currentStepIndex: 2,
         headline:
             'Seu exame teve uma alteração. Vamos juntas no próximo passo.',
         steps: [
@@ -459,6 +539,7 @@ JourneyPlan journeyForOnboarding(int index) {
       );
     case 3: // Vou fazer a colposcopia
       return JourneyPlan(
+        currentStepIndex: 3,
         headline:
             'A colposcopia é o seu próximo passo. Saber o que esperar ajuda.',
         steps: [
@@ -472,6 +553,7 @@ JourneyPlan journeyForOnboarding(int index) {
       );
     case 4:
       return JourneyPlan(
+        currentStepIndex: 4,
         headline: 'Você já fez a colposcopia. Agora é o acompanhamento.',
         steps: [
           _p('primeiros-cuidados', StepStatus.done, 'Concluído'),
@@ -485,6 +567,7 @@ JourneyPlan journeyForOnboarding(int index) {
     case 5: // Não sei — quero ver tudo
     default:
       return JourneyPlan(
+        currentStepIndex: 0,
         headline: 'Veja a jornada completa, com calma.',
         steps: [
           _p('primeiros-cuidados', StepStatus.current, 'Comece por aqui'),
