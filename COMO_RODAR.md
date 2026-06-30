@@ -1,4 +1,4 @@
-# Como rodar o Acolher
+# Como rodar o Colo Seguro
 
 App Flutter (Android APK + iOS/web) que guia, em áudio, a jornada da paciente no rastreamento do câncer de colo do útero.
 

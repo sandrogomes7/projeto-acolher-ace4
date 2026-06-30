@@ -11,11 +11,11 @@ Future<void> main() async {
   final savedCurrentStepIndex =
       await JourneyProgressStore.loadCurrentStepIndex();
 
-  runApp(AcolherApp(savedCurrentStepIndex: savedCurrentStepIndex));
+  runApp(ColoSeguroApp(savedCurrentStepIndex: savedCurrentStepIndex));
 }
 
-class AcolherApp extends StatelessWidget {
-  const AcolherApp({super.key, this.savedCurrentStepIndex});
+class ColoSeguroApp extends StatelessWidget {
+  const ColoSeguroApp({super.key, this.savedCurrentStepIndex});
 
   final int? savedCurrentStepIndex;
 
@@ -26,7 +26,7 @@ class AcolherApp extends StatelessWidget {
         index != null && index >= 0 && index < onboardingOptions.length;
 
     return MaterialApp(
-      title: 'Acolher',
+      title: 'Colo Seguro',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       home: hasSavedJourney

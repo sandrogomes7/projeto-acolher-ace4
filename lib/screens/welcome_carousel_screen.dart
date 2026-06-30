@@ -56,7 +56,7 @@ class _WelcomeCarouselScreenState extends State<WelcomeCarouselScreen> {
                       color: AppColors.primaryPlum, size: 22),
                   const SizedBox(width: 8),
                   const Text(
-                    'Acolher',
+                    'Colo Seguro',
                     style: TextStyle(
                       color: AppColors.primaryDarker,
                       fontSize: 18,

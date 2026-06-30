@@ -1,11 +1,11 @@
 {
-    "name": "acolher_app",
-    "short_name": "acolher_app",
+    "name": "Colo Seguro",
+    "short_name": "Colo Seguro",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Guia em áudio para o cuidado do colo do útero.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

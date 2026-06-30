@@ -1,5 +1,5 @@
 name: acolher_app
-description: "Acolhimento Digital — guia em áudio para o cuidado do colo do útero."
+description: "Colo Seguro — guia em áudio para o cuidado do colo do útero."
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -40,8 +40,8 @@ flutter_native_splash:
   android: true
   ios: true
   web: false
-  color: "#FFF7F4"
+  color: "#2A1422"
   image: assets/branding/splash_logo.png
   android_12:
-    color: "#FFF7F4"
+    color: "#2A1422"
     image: assets/branding/splash_logo.png

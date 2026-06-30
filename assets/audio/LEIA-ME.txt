@@ -1,5 +1,5 @@
 ==========================================================
-  PASTA DE ÁUDIO — Acolhimento Digital
+  PASTA DE ÁUDIO — Colo Seguro
 ==========================================================
 
 Coloque aqui os arquivos .mp3 da narração. O botão "Ouvir

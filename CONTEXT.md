@@ -1,4 +1,4 @@
-# Projeto Acolher
+# Projeto Colo Seguro
 
 Este contexto descreve a linguagem do aplicativo de acolhimento e orientação da jornada de cuidado após exames preventivos do colo do útero.
 

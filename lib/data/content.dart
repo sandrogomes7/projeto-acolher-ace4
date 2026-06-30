@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// ===================================================================
-/// CONTEÚDO + FLUXOGRAMA DO APP "Acolhimento Digital"
+/// CONTEÚDO + FLUXOGRAMA DO APP "Colo Seguro"
 ///
 /// Aqui ficam:
 ///   1) Os textos de cada tela (retirados do Figma e do fluxograma).

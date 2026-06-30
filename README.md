@@ -1,8 +1,8 @@
-# Acolher — Acolhimento Digital
+# Colo Seguro
 
 App mobile (Flutter) que guia, com calma e em áudio, mulheres pelo caminho do rastreamento do câncer de colo do útero (preventivo → resultado → encaminhamento → colposcopia → acompanhamento).
 
-Telas e textos replicados do Figma **Acolhimento Digital**.
+Telas e textos do app **Colo Seguro**.
 
 ## Como rodar
 
